@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+	<title>
+		<%= title %> - Thunderbolt
+	</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<%- include('components/styles.ejs'); -%>
+
+</head>
+
+<body>
+
+	<%- include('components/header.ejs'); -%>
+
+		<div class="flex mt-2 mx-5">
+			<%- include('components/sidebar.ejs'); -%>
+
+				<div class="flex-1 mx-1">
+					<!-- Content goes here-->
+
+					<div class="card card-border w-full bg-base-100 shadow-xl">
+						<div class="card-body">
+							<h2 class="card-title">Welcome back, Sayantan
+							</h2>
+							<p>Here is your dashboard overview.</p>
+							<div class="card-actions justify-end">
+								<button class="btn btn-primary">Get started</button>
+							</div>
+						</div>
+					</div>
+
+					<!-- Content ends here-->
+				</div>
+		</div>
+
+		<%- include('components/scripts.ejs'); -%>
+
+</body>
+
+</html>
