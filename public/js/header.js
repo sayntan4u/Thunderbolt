@@ -1,5 +1,5 @@
 
-console.log(localStorage.getItem('darkMode'));
+var selectedAvatarId = 17;
 
 if(localStorage.getItem('darkMode') === 'true') {
     document.documentElement.setAttribute('data-theme', 'dark');
@@ -28,6 +28,5 @@ function changeTheme() {
     console.log(localStorage.getItem('darkMode'));
 }
 
-var selectedAvatarId = 17;
-
 $("#avatar_navbar").attr("src", `images/avatars/${selectedAvatarId}.avif`);
+$("#avatar_dropdown").attr("src", `images/avatars/${selectedAvatarId}.avif`);

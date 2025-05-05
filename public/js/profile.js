@@ -1,8 +1,10 @@
-var selectedAvatarId = 17;
+
 
 $("#saveChangeAvatar").click(function() {
     $("#avatar_navbar").attr("src", $("#changeAvatarModal_avatar_selected").attr("src"));
     $("#avatar_profile").attr("src", $("#changeAvatarModal_avatar_selected").attr("src"));
+    $("#avatar_dropdown").attr("src", $("#changeAvatarModal_avatar_selected").attr("src"));
+
     var srcStr = $("#changeAvatarModal_avatar_selected").attr("src");
     selectedAvatarId = srcStr.substring(srcStr.lastIndexOf("/") + 1, srcStr.lastIndexOf("."));
     $("#avatarChangeAlert").removeClass("hidden");
@@ -16,6 +18,18 @@ $("#openChangeAvatarModalBtn").click(function() {
     $("#changeAvatarModal_avatar_selected").attr("src", $("#avatar_profile").attr("src"));   
     loadAvatarListUI(selectedAvatarId);
     changeAvatarModal.showModal();
+});
+
+$("#editProfileBtn").click(function() {
+    $("#updateProfileName").val($("#profileName").html());
+    $("#updateProfileEmail").val($("#profileEmail").html());
+    $("#updateProfilePhone").val($("#profilePhone").html());
+    updateProfileModal.showModal();
+});
+
+$("#updateProfileBtn").click(function() {
+    $("#profileName").html($("#updateProfileName").val());
+    $("#profilePhone").html($("#updateProfilePhone").val());
 });
 
 $(document).on("click", ".avatar_thunder", function(e) {

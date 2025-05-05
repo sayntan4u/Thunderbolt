@@ -22,12 +22,20 @@
                 </div>
             </div>
             <ul tabindex="0"
-                class="header-menu menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-50 p-2 shadow-xl"
+                class="header-menu menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-80 p-2 shadow-xl"
                 data-theme="light">
-                <li><a href="/profile"><i data-lucide="user"></i> Profile</a></li>
-                <li><a href="/settings"><i data-lucide="settings"></i> Settings</a></li>
+                <div class="flex my-2 mx-2">
+                    <div class="flex-none"><img id="avatar_dropdown" class="w-14 h-14 mask mask-squircle" src="images/avatars/17.avif" /></div>
+                    <div class="flex-1 ml-2">
+                        <p class="text-xl">Sayantan Tapadar</p>
+                        <p class="text-[12px] opacity-60 text-ellipsis">sayantan.tapadar9@gmail.com</p>
+                    </div>
+                </div>
                 <div class="divider m-0"></div>
-                <li><a href="/login/logout" class="text-secondary"><i data-lucide="log-out"></i> Logout</a></li>
+                <li><a class="py-2" href="/profile"><i data-lucide="user"></i> Profile</a></li>
+                <li ><a class="py-2" href="/settings"><i data-lucide="settings"></i> Settings</a></li>
+                <div class="divider m-0"></div>
+                <li ><a class="py-2 text-error" href="/login/logout" ><i data-lucide="log-out"></i> Logout</a></li>
             </ul>
         </div>
     </div>
