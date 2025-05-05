@@ -27,3 +27,7 @@ function changeTheme() {
     }
     console.log(localStorage.getItem('darkMode'));
 }
+
+var selectedAvatarId = 17;
+
+$("#avatar_navbar").attr("src", `images/avatars/${selectedAvatarId}.avif`);

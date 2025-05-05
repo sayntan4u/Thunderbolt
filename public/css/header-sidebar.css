@@ -26,3 +26,8 @@
   width: 16px !important;
   height: 16px !important;
 }
+
+input[type=password]:focus {
+ border: none !important;
+}
+
