@@ -23,18 +23,18 @@
 					<!-- Content goes here-->
 
 
-					<div class="card card-border w-full bg-base-100 shadow-xl">
+					<div class="profile_card glass card w-full bg-base-100 shadow-xl" data-theme="light">
 						<div class="card-body">
 							<div class="card-body">
 								<div class="flex w-full flex-col gap-4">
 									<div class="flex items-center gap-4">
-										<div class="indicator ">
+										<div class="indicator">
 											<button id="openChangeAvatarModalBtn"
 												class="indicator-item indicator-bottom btn btn-error h-8 w-8 p-0 "
 												style="translate: var(--inidicator-x, -33%) -28%;" data-theme="dark"><i
 													data-lucide="pen-line"
 													style="width: 18px; height: 18px;"></i></button>
-											<div class="h-56 w-56 shrink-0 mask mask-squircle">
+											<div class="h-56 w-56 shrink-0 mask mask-squircle ">
 												<img id="avatar_profile" src="images/avatars/1.avif" />
 											</div>
 										</div>
@@ -52,24 +52,24 @@
 											</div>
 											<div class="h-4 w-30">
 												<span class="text-sm">
-													<div class="badge badge-soft badge-accent">Active</div>
+													<div class="badge badge-soft badge-accent" data-theme="dark">Active</div>
 												</span>
 											</div>
 										</div>
 									</div>
 									<div id="avatarChangeAlert" role="alert" class="flex alert alert-success hidden">
 										<div class="flex-none">
-											<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current"
-											fill="none" viewBox="0 0 24 24">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-												d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-										</svg>
+											<svg xmlns="http://www.w3.org/2000/svg"
+												class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+													d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+											</svg>
 										</div>
 										<div class="flex-1">
 											<span>Your avatar has been updated!</span>
 										</div>
-										
-										
+
+
 									</div>
 								</div>
 
@@ -111,15 +111,16 @@
 							<h2 class="card-title">Delete account</h2>
 							<div class="flex flex-row items-end gap-4">
 								<div class="flex-1">
-									<p>Delete your account and remove all data (<span class="text-error">This action cannot be
-										reversed</span>)</p>
+									<p>Delete your account and remove all data (<span class="text-error">This action
+											cannot be
+											reversed</span>)</p>
 								</div>
 								<div class="flex-none">
 									<button class="btn btn-soft btn-error">Delete Account</button>
 								</div>
 
 							</div>
-							
+
 						</div>
 					</div>
 					<!-- Content ends here-->
