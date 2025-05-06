@@ -22,9 +22,20 @@
 
 				<div class="container mx-auto">
 					<!-- Content goes here-->
-
+					<div class="card card-border bg-base-100 w-full mb-4 shadow-xl">
+						<div class="card-body">
+							<details class="dropdown">
+								<summary class="btn m-1">open or close</summary>
+								<ul class="menu dropdown-content bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+									<li><a>Item 1</a></li>
+									<li><a>Item 2</a></li>
+								</ul>
+							</details>
+						</div>
+					</div>
 					<div class="card card-border w-full bg-base-100 shadow-xl">
 						<div class="card-body relative flex flex-wrap overflow-x-hidden">
+
 							<div class="overflow-x-auto w-full pb-5">
 								<table class="table table-xs table-pin-cols table-zebra">
 									<thead data-theme="light">
@@ -34,7 +45,7 @@
 											<td class="text-center pt-3">Week added</td>
 											<td class="text-center pt-3">Zone</td>
 											<td class="text-center pt-3">City</td>
-											<td class="text-center pt-3">Chatting</td>
+											<td class="text-center pt-3 bl">Chatting</td>
 											<td class="text-center pt-3">Social Media</td>
 											<td colspan="3" class="text-center pt-3 bl br bb">Info</td>
 											<!-- <td>Info week</td>
@@ -53,36 +64,36 @@
 											<td></td>
 										</tr>
 										<tr>
-											<td></td>
-											<th class="bg-primary"></th>
-											<td class=""></td>
-											<td class=""></td>
-											<td class=""></td>
-											<td class=""></td>
-											<td class=""></td>
-											<td class="text-center pb-2 bl">Done</td>
-											<td class="text-center pb-2">Week</td>
-											<td class="text-center pb-2 br">Response</td>
+											<td class="bb"></td>
+											<th class="bg-primary bb"></th>
+											<td class="bb"></td>
+											<td class="bb"></td>
+											<td class="bb"></td>
+											<td class="bl bb"></td>
+											<td class="bb"></td>
+											<td class="text-center pb-2 bl bb">Done</td>
+											<td class="text-center pb-2 bb">Week</td>
+											<td class="text-center pb-2 bb br">Response</td>
 											<!-- <td>Info week</td>
 										<td>Response</td> -->
-											<td class="text-center pb-2 bl">Done</td>
-											<td class="text-center pb-2">Week</td>
-											<td class="text-center pb-2 br">Response</td>
+											<td class="text-center pb-2 bb bl">Done</td>
+											<td class="text-center pb-2 bb">Week</td>
+											<td class="text-center pb-2 bb br">Response</td>
 											<!-- <td>Reinfo week</td>
 										<td>Response</td> -->
-											<td></td>
-											<td class="text-center pb-2 bl">Done</td>
-											<td class="text-center pb-2 ">Week</td>
-											<td class="text-center pb-2 br">Response</td>
+											<td class="bb"></td>
+											<td class="text-center pb-2 bb bl">Done</td>
+											<td class="text-center pb-2 bb">Week</td>
+											<td class="text-center pb-2 bb br">Response</td>
 											<!-- <td>Invite week</td>
 										<td>Invite status</td> -->
-											<td class="text-center pb-2 bl">Done</td>
-											<td class="text-center pb-2">Week</td>
-											<td class="text-center pb-2 br">Status</td>
+											<td class="text-center pb-2 bb bl">Done</td>
+											<td class="text-center pb-2 bb">Week</td>
+											<td class="text-center pb-2 bb br">Status</td>
 											<!-- <td>Plan week</td>
 										<td>Plan status</td> -->
-											<td></td>
-											<td></td>
+											<td class="bb"></td>
+											<td class="bb"></td>
 										</tr>
 									</thead>
 									<tbody id="namelistTable">
@@ -93,13 +104,16 @@
 
 							</div>
 							<div class="join mt-6">
-								<button class="join-item btn btn-sm btn-primary">«</button>
-								<button class="join-item btn btn-sm">Page 22</button>
-								<button class="join-item btn btn-sm btn-primary">»</button>
+								<button class="join-item btn btn-soft btn-sm btn-accent"><i
+										data-lucide="chevron-left"></i></button>
+								<button class="join-item btn btn-sm text-base-content px-5" disabled>1</button>
+								<button class="join-item btn  btn-soft btn-sm btn-accent"><i
+										data-lucide="chevron-right"></i></button>
 							</div>
 
 						</div>
 					</div>
+
 
 					<!-- Content ends here-->
 				</div>

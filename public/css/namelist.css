@@ -5,11 +5,17 @@ thead td {
   background-color: var(--color-accent);
 }
 
+/* tbody tr{
+    border: none !important;
+} */
+
 tbody th {
   font-size: 10px;
   width: 100px !important;
-  background-color: whitesmoke;
-  border: 1px solid whitesmoke !important;
+  background-color: var(--color-primary-content);
+  border: none !important;
+  /* border-top: 2px solid whitesmoke !important; 
+  border-bottom: 2px solid whitesmoke !important;  */
 }
 
 tbody td {
@@ -23,7 +29,7 @@ tbody td {
 
 .name_col input[type="text"] {
   padding: 10px !important;
-  font-size: 10px;
+  font-size: 12px;
   width: 170px;
   border: none !important;
   color: #000;
@@ -56,6 +62,7 @@ tbody input[type="text"]:focus {
 
 tbody select {
   width: 75px;
+  cursor: pointer;
   /* background-color: transparent !important; */
   font-size: 12px !important;
   padding: 7px !important;

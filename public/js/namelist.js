@@ -45,8 +45,8 @@ function generateRowNamelistUI(sl,name) {
 												</select>
 											</td>
 											<td class="city"><input type="text" placeholder="city" /></td>
-											<td> <input type="checkbox" class="checkbox" /></td>
-											<td> <input type="checkbox" class="checkbox" /></td>
+											<td class="bl"> <input type="checkbox" class="checkbox" /></td>
+											<td class="br"> <input type="checkbox" class="checkbox" /></td>
 											<td class="bl"> <input type="checkbox" class="checkbox" /></td>
 											<td>
 												<select class="week weekInfo">
