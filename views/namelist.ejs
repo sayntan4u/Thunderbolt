@@ -26,7 +26,7 @@
 					<div class="control_card card card-border w-full bg-base-100 shadow-xl">
 						<div class="card-body relative flex flex-wrap overflow-x-hidden">
 							<div class="flex w-full justify-between">
-								<div class="flex">
+								<div class="flex items-center">
 									<div class="flex-none">
 										<label class="select select-sm">
 											<span class="label"><i class="h-5 w-5" data-lucide="list-filter"></i></span>
@@ -84,13 +84,20 @@
 									</div>
 									<!--Search button goes here-->
 									<div class="flex-none ml-1">
-										<button class="btn btn-sm btn-soft btn-success"><i class="h-5 w-5"
-												data-lucide="search"></i></button>
+										<button class="btn btn-sm btn-soft btn-success" disabled>
+											<i class="h-5 w-5 hidden" data-lucide="search"></i>
+											<span class="loading loading-bars loading-sm text-accent "></span>
+										</button>
+									</div>
+									<div class="flex-none ml-3">
+
+
 									</div>
 
 								</div>
 								<div class="flex justify-self-end">
-									<button class="btn btn-sm btn-primary p-0 h-8 w-8"><i class="h-5 w-5" data-lucide="plus"></i></button>
+									<button class="btn btn-sm btn-primary p-0 h-8 w-8"><i class="h-5 w-5"
+											data-lucide="plus"></i></button>
 
 								</div>
 							</div>
@@ -163,13 +170,21 @@
 								</table>
 
 							</div>
-							<div class="join mt-6">
-								<button class="join-item btn btn-soft btn-sm btn-accent"><i
-										data-lucide="chevron-left"></i></button>
-								<button class="join-item btn btn-sm text-base-content px-5" disabled>1</button>
-								<button class="join-item btn  btn-soft btn-sm btn-accent"><i
-										data-lucide="chevron-right"></i></button>
+							<div class="flex items-center  mt-6">
+								<div class="flex-none">
+									<div class="join">
+										<button class="join-item btn btn-soft btn-sm btn-accent p-0 w-8 h-8"><i
+												data-lucide="chevron-left"></i></button>
+										<button class="join-item btn btn-sm text-base-content px-5" disabled>1</button>
+										<button class="join-item btn  btn-soft btn-sm btn-accent p-0 w-8 h-8"><i
+												data-lucide="chevron-right"></i></button>
+									</div>
+								</div>
+								<div class="flex-none ml-5">
+									<p>1-10 of <b>37</b> namelist</p>
+								</div>
 							</div>
+
 
 						</div>
 					</div>
