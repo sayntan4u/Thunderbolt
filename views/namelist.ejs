@@ -6,6 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<%- include('components/styles.ejs'); -%>
+	<link rel="stylesheet" href="/css/namelist.css">
 
 </head>
 
@@ -14,16 +15,174 @@
 	<%- include('components/header.ejs'); -%>
 	<%- include('components/sidebar.ejs'); -%>
 
-		<div class="wrapper flex mt-18 ml-25 mr-5">
+		<div class="wrapper flex mt-18 ml-25 mr-5 mb-20">
 
 
-				<div class="flex-1 mx-1">
+				<div class="container mx-auto">
 					<!-- Content goes here-->
 					 
 					<div class="card card-border w-full bg-base-100 shadow-xl">
-						<div class="card-body">
-							
-							<p>Here is your namelist overview.</p>
+						<div class="card-body relative flex flex-wrap overflow-x-hidden">
+							<div class="overflow-x-auto w-full py-5">
+								<table class="table table-xs table-pin-cols border-collapse">
+								  <thead data-theme="light">
+									<tr>
+									  <td></td>
+									  <th class="text-center">Name</th>
+									  <td class="text-center">Week added</td>
+									  <td class="text-center">Zone</td>
+									  <td class="text-center">City</td>
+									  <td class="text-center">Chatting</td>
+									  <td class="text-center">Social Media</td>
+									  <td colspan="3" class="text-center border-l-1">Info</td>
+									  <!-- <td>Info week</td>
+									  <td>Response</td> -->
+									  <td colspan="3" class="text-center">Reinfo</td>
+									  <!-- <td>Reinfo week</td>
+									  <td>Response</td> -->
+									  <td class="text-center">Meetup</td>
+									  <td colspan="3" class="text-center">Invite</td>
+									  <!-- <td>Invite week</td>
+									  <td>Invite status</td> -->
+									  <td colspan="3" class="text-center">Plan</td>
+									  <!-- <td>Plan week</td>
+									  <td>Plan status</td> -->
+									  <td class="text-center">Remarks</td>
+									  <td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<th class="bg-primary"></th>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td class="text-center">Done</td>
+										<td class="text-center">Week</td>
+										<td class="text-center">Response</td>
+										<!-- <td>Info week</td>
+										<td>Response</td> -->
+										<td class="text-center">Done</td>
+										<td class="text-center">Week</td>
+										<td class="text-center">Response</td>
+										<!-- <td>Reinfo week</td>
+										<td>Response</td> -->
+										<td></td>
+										<td class="text-center">Done</td>
+										<td class="text-center">Week</td>
+										<td class="text-center">Response</td>
+										<!-- <td>Invite week</td>
+										<td>Invite status</td> -->
+										<td class="text-center">Done</td>
+										<td class="text-center">Week</td>
+										<td class="text-center">Status</td>
+										<!-- <td>Plan week</td>
+										<td>Plan status</td> -->
+										<td></td>
+										<td></td>
+									  </tr>
+								  </thead>
+								  <tbody>
+									<tr>
+									  <td class="sl">1</td>
+									  <th class="name_col z-[2]"><input type="text" value="Sayantan"/></th>
+									  <td>
+										<select class="week weekAdded">
+											<option selected></option>
+										</select>
+									  </td>
+									  <td>
+										<select class="zone">
+											<option selected></option>
+											<option>Office</option>
+											<option>PG</option>
+											<option>School</option>
+											<option>College</option>
+											<option>Others</option>
+										</select>
+									  </td>
+									  <td class="city"><input type="text" placeholder="city" /></td>
+									  <td> <input type="checkbox" class="checkbox" /></td>
+									  <td> <input type="checkbox" class="checkbox" /></td>
+									  <td> <input type="checkbox" class="checkbox" /></td>
+									  <td>
+										<select class="week weekInfo">
+											<option selected></option>
+										</select>
+									  </td>
+									  <td>
+										<select class="response responseInfo">
+											<option selected></option>
+										</select>
+									  </td>
+									  <td> <input type="checkbox" class="checkbox" /></td>
+									  <td>
+										<select class="week weekReinfo">
+											<option selected></option>
+										</select>
+									  </td>
+									  <td>
+										<select class="response responseReinfo">
+											<option selected></option>
+										</select>
+									  </td>
+									  <td> <input type="checkbox" class="checkbox" /></td>
+									  <td> <input type="checkbox" class="checkbox" /></td>
+									  <td>
+										<select class="week weekInvite">
+											<option selected></option>
+										</select>
+									  </td>
+									  <td>
+										<select class="responseInvite">
+											<option selected></option>
+											<option>Yes</option>
+											<option>No</option>
+										</select>
+									  </td>
+									  <td> <input type="checkbox" class="checkbox" /></td>
+									  <td>
+										<select class="week weekPlan">
+											<option selected></option>
+										</select>
+									  </td>
+									  <td>
+										<select class="planStatus">
+											<option selected></option>
+											<option>CIP</option>
+											<option>AOS</option>
+											<option>LA2</option>
+											<option>LA</option>
+											<option>MIA</option>
+											<option>OOZ</option>
+											<option>KIV</option>
+											<option>Onboarded</option>
+										</select>
+									  </td>
+									  <td class="remarks"><input type="text"  placeholder="remarks"/></td>
+									  <td>
+										<div class="flex">
+											<div class=""><button class="btn btn-soft btn-sm btn-error p-0 h-7 w-7"><i class="w-5 h-5" data-lucide="trash-2"></i></button></div>
+											<!-- <div class="ml-1"><button class="btn btn-sm">hide</button></div> -->
+										</div>
+										
+										
+									  </td>
+									</tr>
+									
+									
+									
+								  </tbody>
+								  
+								</table>
+								
+							</div>
+							<div class="join mt-6">
+								<button class="join-item btn btn-sm btn-primary">«</button>
+								<button class="join-item btn btn-sm">Page 22</button>
+								<button class="join-item btn btn-sm btn-primary">»</button>
+							</div>
 							
 						</div>
 					</div>
@@ -34,6 +193,7 @@
 
 
 		<%- include('components/scripts.ejs'); -%>
+		<script src="/js/namelist.js"></script>
 
 </body>
 
