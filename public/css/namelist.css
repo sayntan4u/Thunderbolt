@@ -28,8 +28,8 @@ tbody td {
 }
 
 .name_col input[type="text"] {
-  padding: 10px !important;
-  font-size: 12px;
+  padding: 7px !important;
+  font-size: 11px;
   width: 170px;
   border: none !important;
   color: #000;
@@ -60,6 +60,19 @@ tbody input[type="text"]:focus {
   border: none !important;
 }
 
+.weekInfo input[type="text"],
+.weekReinfo input[type="text"],
+.weekInvite input[type="text"],
+.weekPlan input[type="text"],
+.weekAdded input[type="text"] {
+  width: 50px !important;
+  background-color: transparent !important;
+  text-align: center !important;
+  font-size: 12px !important;
+  padding: 7px !important;
+  border: none !important;
+}
+
 tbody select {
   width: 75px;
   cursor: pointer;
@@ -74,7 +87,6 @@ tbody select option {
   color: #000;
 }
 
-.week,
 .responseInvite,
 .response {
   width: 50px !important;
@@ -111,4 +123,11 @@ tbody select option {
   .bb {
     border-bottom: 1px solid var(--color-accent-content) !important;
   }
+}
+
+.control_card{
+.input,
+.select {
+  outline: none;
+}
 }

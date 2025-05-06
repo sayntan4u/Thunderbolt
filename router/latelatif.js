@@ -11,7 +11,7 @@ const requireAuth = (req, res, next) => {
 }
 
 router.get('/',requireAuth, function (req, res) {
-    res.render('namelist', { title: 'Namelist' });
+    res.render('latelatif', { title: 'Late Latif' });
 });
 
 

@@ -43,9 +43,13 @@ app.use('/login', loginRoute);
 const dashboardRoute = require('./router/dashboard');
 app.use('/dashboard', dashboardRoute);
 
-//Activities page
-const activitiesRoute = require('./router/activities');
-app.use('/activities', activitiesRoute);
+//KIV page
+const kivRoute = require('./router/kiv');
+app.use('/kiv', kivRoute);
+
+//latelatif page
+const lateLatifRoute = require('./router/latelatif');
+app.use('/latelatif', lateLatifRoute);
 
 //Namelist page
 const namelistRoute = require('./router/namelist');   

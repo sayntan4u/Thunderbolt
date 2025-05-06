@@ -22,21 +22,81 @@
 
 				<div class="container mx-auto">
 					<!-- Content goes here-->
-					<div class="card card-border bg-base-100 w-full mb-4 shadow-xl">
-						<div class="card-body">
-							<details class="dropdown">
-								<summary class="btn m-1">open or close</summary>
-								<ul class="menu dropdown-content bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-									<li><a>Item 1</a></li>
-									<li><a>Item 2</a></li>
-								</ul>
-							</details>
-						</div>
-					</div>
-					<div class="card card-border w-full bg-base-100 shadow-xl">
-						<div class="card-body relative flex flex-wrap overflow-x-hidden">
 
-							<div class="overflow-x-auto w-full pb-5">
+					<div class="control_card card card-border w-full bg-base-100 shadow-xl">
+						<div class="card-body relative flex flex-wrap overflow-x-hidden">
+							<div class="flex w-full justify-between">
+								<div class="flex">
+									<div class="flex-none">
+										<label class="select select-sm">
+											<span class="label"><i class="h-5 w-5" data-lucide="list-filter"></i></span>
+											<select onchange="filterValueChanged(this)">
+												<option></option>
+												<option>Name</option>
+												<option>Week Added</option>
+												<option>Zone</option>
+												<option>City</option>
+												<option>Chatting</option>
+												<option>Social Media</option>
+												<option>Info</option>
+												<option>Reinfo</option>
+												<option>Meetup</option>
+												<option>Invi</option>
+												<option>Plan</option>
+											</select>
+										</label>
+									</div>
+									<div class="option flex-none ml-1 hidden">
+										<label id="sortName" class="input input-sm">
+											<input type="text" placeholder="search a name.." />
+										</label>
+									</div>
+									<div class="option flex-none ml-1 hidden">
+										<label id="sortWeek" class="select select-sm">
+											<span class="label">Week</span>
+											<select>
+											</select>
+										</label>
+									</div>
+									<div class="option flex-none ml-1 hidden">
+										<label id="sortZone" class="select select-sm">
+											<select>
+												<option>Office</option>
+												<option>PG</option>
+												<option>School</option>
+												<option>College</option>
+												<option>Others</option>
+											</select>
+										</label>
+									</div>
+									<div class="option flex-none ml-1 hidden">
+										<label id="sortCity" class="input input-sm">
+											<input type="text" placeholder="search a city.." />
+										</label>
+									</div>
+									<div class="option flex-none ml-1 hidden">
+										<label id="sortDonePending" class="select select-sm">
+											<select>
+												<option>Done</option>
+												<option>Pending</option>
+											</select>
+										</label>
+									</div>
+									<!--Search button goes here-->
+									<div class="flex-none ml-1">
+										<button class="btn btn-sm btn-soft btn-success"><i class="h-5 w-5"
+												data-lucide="search"></i></button>
+									</div>
+
+								</div>
+								<div class="flex justify-self-end">
+									<button class="btn btn-sm btn-primary p-0 h-8 w-8"><i class="h-5 w-5" data-lucide="plus"></i></button>
+
+								</div>
+							</div>
+
+
+							<div class="overflow-x-auto w-full mt-2 pb-5">
 								<table class="table table-xs table-pin-cols table-zebra">
 									<thead data-theme="light">
 										<tr>
