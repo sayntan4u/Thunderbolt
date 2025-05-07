@@ -20,17 +20,19 @@
         var data = {email : $(".email").val(), password :  $(".password").val()}
         console.log(data);
 
-        if(check){
-            $.ajax({
-                url: '/login', // Sample API endpoint
-                method: 'POST',
-                data: data,
-                dataType: 'json'
+        // if(check){
+        //     $.ajax({
+        //         url: '/login', // Sample API endpoint
+        //         method: 'POST',
+        //         data: data,
+        //         dataType: 'json'
 
-            });
-        }else{
-            return check;
-        }
+        //     });
+        // }else{
+           
+        // }
+
+        return check;
     });
 
 

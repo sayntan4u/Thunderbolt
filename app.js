@@ -1,6 +1,7 @@
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
+const cors = require("cors");
 
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(session({
   saveUninitialized: true,
   cookie: { secure: false }
 }));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
