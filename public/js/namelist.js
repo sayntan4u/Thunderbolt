@@ -1,9 +1,9 @@
-class UserThunderbolt {
-  constructor(
+class Prospect {
+  constructor({
     name,
     week,
-    city,
     zone,
+    city = "",
     chatting = false,
     socialMedia = false,
     info = false,
@@ -19,12 +19,12 @@ class UserThunderbolt {
     plan = false,
     planWeek = "",
     planStatus = "",
-    remarks = ""
-  ) {
+    remarks = "",
+  }) {
     this.name = name;
     this.week = week;
-    this.city = city;
     this.zone = zone;
+    this.city = city;
     this.chatting = chatting;
     this.socialMedia = socialMedia;
     this.info = info;
@@ -44,8 +44,29 @@ class UserThunderbolt {
   }
 }
 
+//testing
+
+const p1 = new Prospect({name : "Gangotri Mandava", week : 18, zone: "Office"});
+const p2 = new Prospect({name : "Anjusree Gunji", week : 18, zone: "PG"});
+const p3 = new Prospect({name : "Srividya Tikka", week : 18, zone: "Office"});
+
 const namelist = [];
-var sl = 1;
+
+namelist.push(p1);
+namelist.push(p2);
+namelist.push(p3);
+namelist.push(new Prospect({name : "Gangotri Mandava", week : 18, zone: "Office"}));
+namelist.push(new Prospect({name : "Gangotri Mandava", week : 18, zone: "Office"}));
+namelist.push(new Prospect({name : "Anjusree Gunji", week : 18, zone: "PG"}));
+namelist.push(new Prospect({name : "Gangotri Mandava", week : 18, zone: "Office"}));
+namelist.push(new Prospect({name : "Gangotri Mandava", week : 18, zone: "Office"}));
+namelist.push(new Prospect({name : "Gangotri Mandava", week : 18, zone: "Office"}));
+namelist.push(new Prospect({name : "Anjusree Gunji", week : 18, zone: "PG"}));
+namelist.push(new Prospect({name : "Gangotri Mandava", week : 18, zone: "Office"}));
+namelist.push(new Prospect({name : "Anjusree Gunji", week : 18, zone: "PG"}));
+namelist.push(new Prospect({name : "Gangotri Mandava", week : 18, zone: "Office"}));
+namelist.push(new Prospect({name : "Srividya Tikka", week : 18, zone: "Office"}));
+namelist.push(new Prospect({name : "Gangotri Mandava", week : 18, zone: "Office"}));
 
 function generateSortWeekDropDownUI() {
   var weekDropDownUI = "";
@@ -85,83 +106,99 @@ function filterValueChanged(elem) {
   }
 }
 
-function generateRowNamelistUI(sl, user) {
-  //   $("#namelistTable").empty();
+function generateRowNamelistUI(sl, prospect) {
+  //
   $("#namelistTable").append(`
         						<tr>
 							<td class="sl">${sl}</td>
-							<th class="name_col z-[2]"><input type="text" value="${user.name}" /></th>
+							<th class="name_col z-[2]"><input type="text" value="${prospect.name}" /></th>
 							<td class="weekAdded"><input type="text" placeholder="week" value="${
-                user.week
+                prospect.week
               }" /></td>
 							<td>
 								<select class="zone">
-									<option ${user.zone == "Office" ? "selected" : ""}>Office</option>
-									<option ${user.zone == "PG" ? "selected" : ""}>PG</option>
-									<option ${user.zone == "School" ? "selected" : ""}>School</option>
-									<option ${user.zone == "College" ? "selected" : ""}>College</option>
-									<option ${user.zone == "Others" ? "selected" : ""}>Others</option>
+									<option ${prospect.zone == "Office" ? "selected" : ""}>Office</option>
+									<option ${prospect.zone == "PG" ? "selected" : ""}>PG</option>
+									<option ${prospect.zone == "School" ? "selected" : ""}>School</option>
+									<option ${prospect.zone == "College" ? "selected" : ""}>College</option>
+									<option ${prospect.zone == "Others" ? "selected" : ""}>Others</option>
 								</select>
 							</td>
 							<td class="city"><input type="text" placeholder="city" value="${
-                user.city
+                prospect.city
               }" /></td>
-							<td class="bl"> <input type="checkbox" class="checkbox" ${user.chatting == true ? "checked" : ""}/></td>
-							<td class="br"> <input type="checkbox" class="checkbox" ${user.socialMedia == true ? "checked" : ""}/></td>
-							<td class="bl"> <input type="checkbox" class="checkbox" ${user.info == true ? "checked" : ""}/></td>
+							<td class="bl"> <input type="checkbox" class="checkbox" ${
+                prospect.chatting == true ? "checked" : ""
+              }/></td>
+							<td class="br"> <input type="checkbox" class="checkbox" ${
+                prospect.socialMedia == true ? "checked" : ""
+              }/></td>
+							<td class="bl"> <input type="checkbox" class="checkbox" ${
+                prospect.info == true ? "checked" : ""
+              }/></td>
 							<td class="weekInfo"><input type="text" placeholder="week" value="${
-                user.infoWeek
+                prospect.infoWeek
               }"/></td>
 							<td class="br">
 								<select class="response responseInfo">
 									<option></option>
-									<option ${user.infoResponse == "A" ? "selected" : ""}>A</option>
-									<option ${user.infoResponse == "B" ? "selected" : ""}>B</option>
-									<option ${user.infoResponse == "C" ? "selected" : ""}>C</option>
+									<option ${prospect.infoResponse == "A" ? "selected" : ""}>A</option>
+									<option ${prospect.infoResponse == "B" ? "selected" : ""}>B</option>
+									<option ${prospect.infoResponse == "C" ? "selected" : ""}>C</option>
 								</select>
 							</td>
-							<td class="bl"> <input type="checkbox" class="checkbox" ${user.reinfo == true ? "checked" : ""}/></td>
+							<td class="bl"> <input type="checkbox" class="checkbox" ${
+                prospect.reinfo == true ? "checked" : ""
+              }/></td>
 							<td class="weekReinfo"><input type="text" placeholder="week" value="${
-                user.reinfoWeek
+                prospect.reinfoWeek
               }"/></td>
 							<td class="br">
 								<select class="response responseReinfo">
 									<option></option>
-									<option ${user.reinfoResponse == "A" ? "selected" : ""}>A</option>
-									<option ${user.reinfoResponse == "B" ? "selected" : ""}>B</option>
-									<option ${user.reinfoResponse == "C" ? "selected" : ""}>C</option>
+									<option ${prospect.reinfoResponse == "A" ? "selected" : ""}>A</option>
+									<option ${prospect.reinfoResponse == "B" ? "selected" : ""}>B</option>
+									<option ${prospect.reinfoResponse == "C" ? "selected" : ""}>C</option>
 								</select>
 							</td>
-							<td> <input type="checkbox" class="checkbox" ${user.meetup == true ? "checked" : ""}/></td>
-							<td class="bl"> <input type="checkbox" class="checkbox" ${user.invi == true ? "checked" : ""}/></td>
+							<td> <input type="checkbox" class="checkbox" ${
+                prospect.meetup == true ? "checked" : ""
+              }/></td>
+							<td class="bl"> <input type="checkbox" class="checkbox" ${
+                prospect.invi == true ? "checked" : ""
+              }/></td>
 							<td class="weekInvite"><input type="text" placeholder="week" value="${
-                user.inviWeek
+                prospect.inviWeek
               }"/></td>
 							<td class="br">
 								<select class="responseInvite">
 									<option></option>
-									<option ${user.inviResponse == "Yes" ? "selected" : ""}>Yes</option>
-									<option ${user.inviResponse == "No" ? "selected" : ""}>No</option>
+									<option ${prospect.inviResponse == "Yes" ? "selected" : ""}>Yes</option>
+									<option ${prospect.inviResponse == "No" ? "selected" : ""}>No</option>
 								</select>
 							</td>
-							<td class="bl"> <input type="checkbox" class="checkbox" ${user.plan == true ? "checked" : ""}/></td>
+							<td class="bl"> <input type="checkbox" class="checkbox" ${
+                prospect.plan == true ? "checked" : ""
+              }/></td>
 							<td class="weekPlan"><input type="text" placeholder="week" value="${
-                user.planWeek
+                prospect.planWeek
               }"/></td>
 							<td class="br">
 								<select class="planStatus">
 									<option></option>
-									<option ${user.planStatus == "CIP" ? "selected" : ""}>CIP</option>
-									<option ${user.planStatus == "AOS" ? "selected" : ""}>AOS</option>
-									<option ${user.planStatus == "LA2" ? "selected" : ""}>LA2</option>
-									<option ${user.planStatus == "LA" ? "selected" : ""}>LA</option>
-									<option ${user.planStatus == "MIA" ? "selected" : ""}>MIA</option>
-									<option ${user.planStatus == "OOZ" ? "selected" : ""}>OOZ</option>
-									<option ${user.planStatus == "Onboarded" ? "selected" : ""}>Onboarded</option>
+									<option ${prospect.planStatus == "CIP" ? "selected" : ""}>CIP</option>
+									<option ${prospect.planStatus == "AOS" ? "selected" : ""}>AOS</option>
+									<option ${prospect.planStatus == "LA2" ? "selected" : ""}>LA2</option>
+									<option ${prospect.planStatus == "LA" ? "selected" : ""}>LA</option>
+									<option ${prospect.planStatus == "MIA" ? "selected" : ""}>MIA</option>
+									<option ${prospect.planStatus == "OOZ" ? "selected" : ""}>OOZ</option>
+									<option ${
+                    prospect.planStatus == "Onboarded" ? "selected" : ""
+                  }>Onboarded</option>
 								</select>
 							</td>
 							<td class="remarks"><input type="text" placeholder="remarks" value="${
-                user.remarks
+                prospect.remarks
               }"/></td>
 							<th>
 								<div class="flex">
@@ -187,22 +224,66 @@ function clearFormAddPerson() {
   addPersonCity.value = "";
 }
 
+function setNLCount(count){
+  nlCount.innerHTML = count;
+  fromProspect.innerHTML = (parseInt(pageNumber.innerHTML) - 1)*10 + 1;
+  if(count > parseInt(pageNumber.innerHTML)*10){
+    toProspect.innerHTML = parseInt(pageNumber.innerHTML)*10;
+  }else{
+    toProspect.innerHTML = count;
+  }
+}
+
+
+function goBack(){
+  if(parseInt(pageNumber.innerHTML)>1){
+    pageNumber.innerHTML = parseInt(pageNumber.innerHTML) - 1;
+  }
+  generateNL(namelist);
+}
+
+function goForward(){
+  if(parseInt(pageNumber.innerHTML)< parseInt(namelist.length/10) + 1){
+    pageNumber.innerHTML = parseInt(pageNumber.innerHTML) + 1;
+  }
+  generateNL(namelist);
+}
+
+//Addition
 function addPerson() {
   const name = addPersonName.value;
   const city = addPersonCity.value;
   const week = addPersonWeekAdded.value;
   const zone = addPersonZone.value;
 
-  const user = new UserThunderbolt(name, week, city, zone, true);
-  generateRowNamelistUI(sl, user);
+  const prospect = new Prospect({name : name, week : week, zone : zone, city: city});
+  namelist.push(prospect);
   clearFormAddPerson();
-  sl++;
+
+  generateNL(namelist);
 }
 
-const names = ["John Doe", "Jane Smith", "Alice Johnson", "Bob Brown"];
+//loading
+function loadNameListUI(namelist, count) {
+  $("#namelistTable").empty();
+  var sl = 1 + (parseInt(pageNumber.innerHTML)-1)*10;
+  for (let i = 0; i < namelist.length; i++) {
+    generateRowNamelistUI(sl, namelist[i]);
+    sl++;
+  }
+  setNLCount(count);
+}
 
-// for (let i = 0; i < names.length; i++) {
-//   generateRowNamelistUI(i + 1, names[i]);
-// }
+function generateNL(namelist){
+  if(namelist.length > parseInt(pageNumber.innerHTML)*10){
+    loadNameListUI(namelist.slice((parseInt(pageNumber.innerHTML)-1)*10, parseInt(pageNumber.innerHTML)*10), namelist.length);
+  }else{
+    loadNameListUI(namelist.slice((parseInt(pageNumber.innerHTML)-1)*10, namelist.length), namelist.length);
+  }
+}
 
 generateSortWeekDropDownUI();
+
+//loadnamelist
+generateNL(namelist);
+
