@@ -12,7 +12,7 @@ thead td {
 tbody th {
   font-size: 10px;
   width: 100px !important;
-  background-color: var(--color-primary-content);
+  /* background-color: var(--color-primary-content); */
   border: none !important;
   /* border-top: 2px solid whitesmoke !important; 
   border-bottom: 2px solid whitesmoke !important;  */
@@ -32,7 +32,7 @@ tbody td {
   font-size: 11px;
   width: 170px;
   border: none !important;
-  color: #000;
+  /* color: #000; */
   /* background-color: beige !important; */
   /* opacity: 1 !important; */
 }
@@ -125,9 +125,8 @@ tbody select option {
   }
 }
 
-.control_card{
+
 .input,
 .select {
   outline: none;
-}
 }

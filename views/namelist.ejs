@@ -28,7 +28,7 @@
 							<div class="flex w-full justify-between">
 								<div class="flex items-center">
 									<div class="flex-none">
-										<label class="select select-sm">
+										<label class="select select-sm w-44">
 											<span class="label"><i class="h-5 w-5" data-lucide="list-filter"></i></span>
 											<select onchange="filterValueChanged(this)">
 												<option></option>
@@ -84,9 +84,9 @@
 									</div>
 									<!--Search button goes here-->
 									<div class="flex-none ml-1">
-										<button class="btn btn-sm btn-soft btn-success" disabled>
-											<i class="h-5 w-5 hidden" data-lucide="search"></i>
-											<span class="loading loading-bars loading-sm text-accent "></span>
+										<button class="btn btn-sm btn-soft btn-success">
+											<i class="h-5 w-5 " data-lucide="search"></i>
+											<span class="loading loading-bars loading-sm text-accent hidden"></span>
 										</button>
 									</div>
 									<div class="flex-none ml-3">
@@ -96,7 +96,8 @@
 
 								</div>
 								<div class="flex justify-self-end">
-									<button class="btn btn-sm btn-primary p-0 h-8 w-8"><i class="h-5 w-5"
+									<button class="btn btn-sm btn-primary p-0 h-8 w-8"
+										onclick="addPersonModal.showModal()"><i class="h-5 w-5"
 											data-lucide="plus"></i></button>
 
 								</div>
@@ -193,6 +194,58 @@
 					<!-- Content ends here-->
 				</div>
 			</div>
+			<dialog id="addPersonModal" class="modal">
+				<div class="modal-box w-110">
+					<h3 class="text-lg font-bold ml-4">Add new person</h3>
+					<fieldset class="fieldset w-full p-4">
+						<label class="input input-md w-full">
+							<span class="label">Name</span>
+							<input id="addPersonName" type="text" class="grow" placeholder="enter name.." />
+						</label>
+						<label class="input input-md w-full mt-2">
+							<span class="label">City</span>
+							<input id="addPersonCity" type="text" class="grow" placeholder="enter city.." />
+						</label>
+
+						<div class="flex mt-2">
+							<div class="flex-1">
+								<label id="weekAddPerson" class="select select-md">
+									<span class="label">Week added</span>
+									<select id="addPersonWeekAdded">
+									</select>
+								</label>
+							</div>
+							<div class="flex-1 ml-3">
+								<label class="select select-md">
+									<span class="label">Zone</span>
+									<select id="addPersonZone">
+										<option>Office</option>
+										<option>PG</option>
+										<option>School</option>
+										<option>College</option>
+										<option>Others</option>
+									</select>
+								</label>
+							</div>
+						</div>
+						<div class="modal-action">
+							<form method="dialog">
+								<!-- if there is a button in form, it will close the modal -->
+								<button class="btn btn-soft" onclick="clearFormAddPerson()">Cancel</button>
+								<button class="btn btn-primary ml-1" onclick="addPerson()">Add person</button>
+							</form>
+						</div>
+
+
+
+
+
+					</fieldset>
+				</div>
+				<form method="dialog" class="modal-backdrop">
+					<button>close</button>
+				</form>
+			</dialog>
 
 
 			<%- include('components/scripts.ejs'); -%>
