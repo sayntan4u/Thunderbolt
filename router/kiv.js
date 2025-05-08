@@ -3,16 +3,16 @@ const router = express.Router();
 const nlm = require("../lib/nlmanager");
 
 const requireAuth = (req, res, next) => {
-  // if (req.session.userId) {
-  //     next(); // User is authenticated, continue to next middleware
-  // } else {
-  //     res.redirect('/login'); // User is not authenticated, redirect to login page
-  // }
-  next();
+  if (req.session.userId) {
+      next(); // User is authenticated, continue to next middleware
+  } else {
+      res.redirect('/login'); // User is not authenticated, redirect to login page
+  }
+
 };
 
 router.get("/", requireAuth, function (req, res) {
-  res.render("kiv", { title: "KIV" });
+  res.render("kiv", { title: "KIV" , user : req.session.userId});
 });
 
 router.post("/getData", requireAuth, async function (req, res) {

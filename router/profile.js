@@ -10,7 +10,7 @@ const requireAuth = (req, res, next) => {
 }
 
 router.get('/',requireAuth, function (req, res) {
-    res.render('profile', { title: 'Profile' });
+    res.render('profile', { title: 'Profile' , user : req.session.userId});
 });
 
 

@@ -65,6 +65,10 @@ app.use('/profile', profileRoute);
 const settingsRoute = require('./router/settings');
 app.use('/settings', settingsRoute);
 
+//User methods
+const userRoute = require('./router/user');
+app.use('/user', userRoute);
+
 
 app.listen(port, '0.0.0.0');
 console.log('Server started at http://localhost:' + port);

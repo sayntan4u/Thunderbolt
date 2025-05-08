@@ -1,58 +1,91 @@
+$("#saveChangeAvatar").click(function () {
+  $("#avatar_navbar").attr(
+    "src",
+    $("#changeAvatarModal_avatar_selected").attr("src")
+  );
+  $("#avatar_profile").attr(
+    "src",
+    $("#changeAvatarModal_avatar_selected").attr("src")
+  );
+  $("#avatar_dropdown").attr(
+    "src",
+    $("#changeAvatarModal_avatar_selected").attr("src")
+  );
 
+  var srcStr = $("#changeAvatarModal_avatar_selected").attr("src");
+  selectedAvatarId = srcStr.substring(
+    srcStr.lastIndexOf("/") + 1,
+    srcStr.lastIndexOf(".")
+  );
 
-$("#saveChangeAvatar").click(function() {
-    $("#avatar_navbar").attr("src", $("#changeAvatarModal_avatar_selected").attr("src"));
-    $("#avatar_profile").attr("src", $("#changeAvatarModal_avatar_selected").attr("src"));
-    $("#avatar_dropdown").attr("src", $("#changeAvatarModal_avatar_selected").attr("src"));
+  saveAvatarFB(selectedAvatarId);
 
-    var srcStr = $("#changeAvatarModal_avatar_selected").attr("src");
-    selectedAvatarId = srcStr.substring(srcStr.lastIndexOf("/") + 1, srcStr.lastIndexOf("."));
-    $("#avatarChangeAlert").removeClass("hidden");
-    $("#avatarChangeAlert").fadeIn(500).delay(2000).fadeOut(500, function() {
-        $(this).addClass("hidden");
+  $("#avatarChangeAlert").removeClass("hidden");
+  $("#avatarChangeAlert")
+    .fadeIn(500)
+    .delay(2000)
+    .fadeOut(500, function () {
+      $(this).addClass("hidden");
     });
-
 });
 
-$("#openChangeAvatarModalBtn").click(function() {
-    $("#changeAvatarModal_avatar_selected").attr("src", $("#avatar_profile").attr("src"));   
-    loadAvatarListUI(selectedAvatarId);
-    changeAvatarModal.showModal();
+$("#openChangeAvatarModalBtn").click(function () {
+  $("#changeAvatarModal_avatar_selected").attr(
+    "src",
+    $("#avatar_profile").attr("src")
+  );
+  loadAvatarListUI(selectedAvatarId);
+  changeAvatarModal.showModal();
 });
 
-$("#editProfileBtn").click(function() {
-    $("#updateProfileName").val($("#profileName").html());
-    $("#updateProfileEmail").val($("#profileEmail").html());
-    $("#updateProfilePhone").val($("#profilePhone").html());
-    updateProfileModal.showModal();
+$("#editProfileBtn").click(function () {
+  $("#updateProfileName").val($("#profileName").html());
+  $("#updateProfileEmail").val($("#profileEmail").html());
+  $("#updateProfilePhone").val($("#profilePhone").html());
+  updateProfileModal.showModal();
 });
 
-$("#updateProfileBtn").click(function() {
-    $("#profileName").html($("#updateProfileName").val());
-    $("#profilePhone").html($("#updateProfilePhone").val());
+$("#updateProfileBtn").click(function () {
+  $("#profileName").html($("#updateProfileName").val());
+  $("#profilePhone").html($("#updateProfilePhone").val());
 });
 
-$(document).on("click", ".avatar_thunder", function(e) {
-    let avatarId = $(this).attr("src");
-    $("#changeAvatarModal_avatar_selected").attr("src", avatarId);
+$(document).on("click", ".avatar_thunder", function (e) {
+  let avatarId = $(this).attr("src");
+  $("#changeAvatarModal_avatar_selected").attr("src", avatarId);
 
-    $("#avatarList").children().each(function(){
-        $(this).children(".avatar_thunder").removeClass("border-4 border-primary");
+  $("#avatarList")
+    .children()
+    .each(function () {
+      $(this)
+        .children(".avatar_thunder")
+        .removeClass("border-4 border-primary");
     });
-    $(this).addClass("border-4 border-primary");
+  $(this).addClass("border-4 border-primary");
 });
 
+function saveAvatarFB(avID) {
+  const data = { uid: uid.innerHTML , avID : avID};
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("POST", "/user/setAvatarId");
+  xhttp.onload = function () {
+    
+  };
+  xhttp.setRequestHeader("Content-Type", "application/json");
+  xhttp.send(JSON.stringify(data));
+}
 
 function loadAvatarListUI(selectedAvatarId) {
-    $("#avatarList").empty();
-    for(let i=1; i<=17; i++){
-        $("#avatarList").append(`
+  $("#avatarList").empty();
+  for (let i = 1; i <= 17; i++) {
+    $("#avatarList").append(`
             <div class="h-20 w-20 shrink-0 mask mask-circle">
-                <img class="avatar_thunder ${(i==selectedAvatarId)? 'border-4 border-primary' : ''}" src="images/avatars/${i}.avif" />
+                <img class="avatar_thunder ${
+                  i == selectedAvatarId ? "border-4 border-primary" : ""
+                }" src="images/avatars/${i}.avif" />
             </div>
             `);
-    }
+  }
 }
 
 loadAvatarListUI(selectedAvatarId);
-$("#avatar_profile").attr("src", `images/avatars/${selectedAvatarId}.avif`);

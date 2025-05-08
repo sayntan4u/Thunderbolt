@@ -27,9 +27,7 @@ router.get("/createAccount", function (req, res) {
 });
 
 router.post("/createAccount", function (req, res) {
-  const { name, email, phone } = req.body;
-
-  authm.signup(name, email, phone);
+  authm.signup(req,res);
 });
 
 router.get("/forgot", function (req, res) {
