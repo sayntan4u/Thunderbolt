@@ -437,7 +437,7 @@ function generateRowNamelistUI(sl, prospect) {
                     prospect.id
                   })"><i
 												class="w-5 h-5" data-lucide="snail"></i></button></div>
-									<div class="ml-1"><button class="btn btn-soft btn-sm btn-error p-0 h-7 w-7" onclick="removeProspect(${
+									<div class="ml-1"><button class="btn btn-soft btn-sm btn-error p-0 h-7 w-7" onclick="openDeleteModal(${
                     prospect.id
                   })"><i
 												class="w-5 h-5" data-lucide="trash-2"></i></button></div>
@@ -475,14 +475,23 @@ function goBack() {
   if (parseInt(pageNumber.innerHTML) > 1) {
     pageNumber.innerHTML = parseInt(pageNumber.innerHTML) - 1;
   }
-  generateNL(namelist);
+  if(isFilter){
+    generateNL(searchedNL);
+  }else{
+    generateNL(namelist);
+  }
 }
 
 function goForward() {
   if (parseInt(pageNumber.innerHTML) < namelist.length / 10) {
     pageNumber.innerHTML = parseInt(pageNumber.innerHTML) + 1;
   }
-  generateNL(namelist);
+  if(isFilter){
+    generateNL(searchedNL);
+  }else{
+    generateNL(namelist);
+  }
+ 
 }
 
 //Addition
@@ -507,6 +516,8 @@ function addPerson() {
 
   generateNL(namelist);
 }
+
+
 
 //updation
 function updateName(id, elem) {
@@ -728,6 +739,18 @@ function transferProspectToLL(id) {
   //Add to LL list
 }
 
+//Modals
+
+function openDeleteModal(id){
+  deleteModalProsName.innerHTML = getName(id);
+  deleteModalProsID.innerHTML = id;
+  deleteProspectModal.showModal();
+}
+
+$("#deleteProspectBtn").click(function(){
+  removeProspect(deleteModalProsID.innerHTML);
+});
+
 //ajax methods
 function addProspectFB(prospect) {
   const data = { prospect: prospect };
@@ -759,6 +782,9 @@ function getNLData() {
     namelist = response;
     generateNL(namelist);
     showAlert("Namelist loaded");
+    $("#fliterDropDown").attr("disabled", false);
+    $(".loading").addClass("hidden");
+    $("#addProspectModalBtn").attr("disabled", false);
   };
   xhttp.setRequestHeader("Content-Type", "application/json");
   xhttp.send();
