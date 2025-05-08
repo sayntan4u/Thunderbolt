@@ -548,7 +548,7 @@ function transferProspectToLLFB(id, name) {
   const xhttp = new XMLHttpRequest();
   xhttp.open("POST", "/namelist/transferToLL");
   xhttp.onload = function () {
-    showAlert(name + " transferred to LL successfully!", "primary");
+    showAlert(name + " transferred to LL successfully!", "info");
   };
   xhttp.setRequestHeader("Content-Type", "application/json");
   xhttp.send(JSON.stringify(data));
