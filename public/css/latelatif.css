@@ -2,7 +2,7 @@ thead tr,
 thead th,
 thead td {
   border: none;
-  background-color: var(--color-accent);
+  background-color: var(--color-secondary-content);
 }
 
 /* tbody tr{
@@ -109,11 +109,6 @@ tbody select option {
   .bb {
     border-bottom: 1px solid var(--color-accent-content) !important;
   }
-
-  .searchedField{
-    background-color: var(--color-primary-content) !important;
-    color:var(--color-neutral) !important;
-  }
 }
 
 [data-theme="dark"] {
@@ -128,11 +123,6 @@ tbody select option {
   .bb {
     border-bottom: 1px solid var(--color-accent-content) !important;
   }
-
-  .searchedField{
-    background-color: var(--color-neutral) !important;
-    color: var(--color-neutral-content) !important;
-  }
 }
 
 
@@ -140,5 +130,3 @@ tbody select option {
 .select {
   outline: none;
 }
-
-

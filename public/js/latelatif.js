@@ -47,8 +47,6 @@ class Prospect {
 }
 
 var namelist = [];
-var searchedNL = [];
-var isFilter = false;
 
 function generateSortWeekDropDownUI() {
   var weekDropDownUI = "";
@@ -59,90 +57,15 @@ function generateSortWeekDropDownUI() {
   $("#weekAddPerson").children("select").append(weekDropDownUI);
 }
 
-function clearSelectionUI() {
-  $("#NLTable")
-    .children("thead")
-    .children("tr")
-    .each(function () {
-      $(this)
-        .children("td")
-        .each(function () {
-          $(this).removeClass("searchedField");
-        });
-      $(this)
-        .children("th")
-        .each(function () {
-          $(this).removeClass("searchedField");
-        });
-    });
-}
-
-function enableSelectionUI(value) {
-  if (value == "Name") {
-    $(".name").addClass("searchedField");
-  }
-  if (value == "Week Added") {
-    $(".weekAdded").addClass("searchedField");
-  }
-  if (value == "City") {
-    $(".city").addClass("searchedField");
-  }
-  if (value == "Zone") {
-    $(".zone").addClass("searchedField");
-  }
-  if (value == "Chatting") {
-    $(".chatting").addClass("searchedField");
-  }
-  if (value == "Social Media") {
-    $(".socialMedia").addClass("searchedField");
-  }
-  if (value == "Info") {
-    $(".info").addClass("searchedField");
-  }
-  if (value == "Reinfo") {
-    $(".reinfo").addClass("searchedField");
-  }
-  if (value == "Meetup") {
-    $(".meetup").addClass("searchedField");
-  }
-  if (value == "Invi") {
-    $(".invi").addClass("searchedField");
-  }
-  if (value == "Plan") {
-    $(".plan").addClass("searchedField");
-  }
-}
-
 function filterValueChanged(elem) {
-  generateNL(namelist);
-  clearSelectionUI();
-  enableSelectionUI($(elem).val());
-
   $(".option").each(function () {
     $(this).addClass("hidden");
   });
-
-  if ($(elem).val() != "") {
-    isFilter = true;
-    $("#cancelFilterBtn").removeClass("hidden");
-  } else {
-    isFilter = false;
-    $("#cancelFilterBtn").addClass("hidden");
-  }
-
   if ($(elem).val() == "Name") {
     $("#sortName").parent().removeClass("hidden");
   } else if ($(elem).val() == "Week Added") {
-    $("#sortWeek option").prop("selected", function () {
-      // return defaultSelected property of the option
-      return this.defaultSelected;
-    });
     $("#sortWeek").parent().removeClass("hidden");
   } else if ($(elem).val() == "Zone") {
-    $("#sortZone option").prop("selected", function () {
-      // return defaultSelected property of the option
-      return this.defaultSelected;
-    });
     $("#sortZone").parent().removeClass("hidden");
   } else if ($(elem).val() == "City") {
     $("#sortCity").parent().removeClass("hidden");
@@ -163,180 +86,19 @@ function filterValueChanged(elem) {
   }
 }
 
-$("#cancelFilterBtn").click(function () {
-  isFilter = false;
-  clearSelectionUI();
-  $(".option").each(function () {
-    $(this).addClass("hidden");
-  });
-
-  generateNL(namelist);
-
-  $("#fliterDropDown").val("");
-  $(this).addClass("hidden");
-});
-
-//Search methods
-
-function searchByName(elem) {
-  pageNumber.innerHTML = 1;
-  const searchStr = $(elem).val();
-  searchedNL = [];
-
-  if (searchStr != "") {
-    for (let i = 0; i < namelist.length; i++) {
-      if (namelist[i].name.toLowerCase().match(searchStr.toLowerCase())) {
-        searchedNL.push(namelist[i]);
-      }
-    }
-  } else {
-    searchedNL = namelist;
-  }
-  generateNL(searchedNL);
-}
-
-function searchByWeekAdded(elem) {
-  pageNumber.innerHTML = 1;
-  const weekAdded = $(elem).val();
-  searchedNL = [];
-  if (weekAdded != "") {
-    for (let i = 0; i < namelist.length; i++) {
-      if (namelist[i].week == weekAdded) {
-        searchedNL.push(namelist[i]);
-      }
-    }
-  } else {
-    searchedNL = namelist;
-  }
-
-  generateNL(searchedNL);
-}
-
-function searchByZone(elem) {
-  pageNumber.innerHTML = 1;
-  const zone = $(elem).val();
-  searchedNL = [];
-  if (zone != "") {
-    for (let i = 0; i < namelist.length; i++) {
-      if (namelist[i].zone == zone) {
-        searchedNL.push(namelist[i]);
-      }
-    }
-  } else {
-    searchedNL = namelist;
-  }
-  generateNL(searchedNL);
-}
-
-function searchByCity(elem) {
-  pageNumber.innerHTML = 1;
-  const searchStr = $(elem).val();
-  searchedNL = [];
-
-  if (searchStr != "") {
-    for (let i = 0; i < namelist.length; i++) {
-      if (namelist[i].city.toLowerCase().match(searchStr.toLowerCase())) {
-        searchedNL.push(namelist[i]);
-      }
-    }
-  } else {
-    searchedNL = namelist;
-  }
-  generateNL(searchedNL);
-}
-
-//helper
-function getTF(donePendingStr) {
-  pageNumber.innerHTML = 1;
-  if (donePendingStr == "Done") {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-function searchByDonePending(elem) {
-  pageNumber.innerHTML = 1;
-  const donePending = $(elem).val();
-  searchedNL = [];
-
-  if (donePending != "") {
-    if ($("#fliterDropDown").val() == "Chatting") {
-      for (let i = 0; i < namelist.length; i++) {
-        if (namelist[i].chatting == getTF(donePending)) {
-          searchedNL.push(namelist[i]);
-        }
-      }
-    }
-    if ($("#fliterDropDown").val() == "Social Media") {
-      for (let i = 0; i < namelist.length; i++) {
-        if (namelist[i].socialMedia == getTF(donePending)) {
-          searchedNL.push(namelist[i]);
-        }
-      }
-    }
-    if ($("#fliterDropDown").val() == "Info") {
-      for (let i = 0; i < namelist.length; i++) {
-        if (namelist[i].info == getTF(donePending)) {
-          searchedNL.push(namelist[i]);
-        }
-      }
-    }
-    if ($("#fliterDropDown").val() == "Reinfo") {
-      for (let i = 0; i < namelist.length; i++) {
-        if (namelist[i].reinfo == getTF(donePending)) {
-          searchedNL.push(namelist[i]);
-        }
-      }
-    }
-    if ($("#fliterDropDown").val() == "Info") {
-      for (let i = 0; i < namelist.length; i++) {
-        if (namelist[i].info == getTF(donePending)) {
-          searchedNL.push(namelist[i]);
-        }
-      }
-    }
-    if ($("#fliterDropDown").val() == "Meetup") {
-      for (let i = 0; i < namelist.length; i++) {
-        if (namelist[i].meetup == getTF(donePending)) {
-          searchedNL.push(namelist[i]);
-        }
-      }
-    }
-    if ($("#fliterDropDown").val() == "Invi") {
-      for (let i = 0; i < namelist.length; i++) {
-        if (namelist[i].invi == getTF(donePending)) {
-          searchedNL.push(namelist[i]);
-        }
-      }
-    }
-    if ($("#fliterDropDown").val() == "Plan") {
-      for (let i = 0; i < namelist.length; i++) {
-        if (namelist[i].plan == getTF(donePending)) {
-          searchedNL.push(namelist[i]);
-        }
-      }
-    }
-  } else {
-    searchedNL = namelist;
-  }
-
-  generateNL(searchedNL);
-}
-
 function generateRowNamelistUI(sl, prospect) {
   //
   $("#namelistTable").append(`
         						<tr>
 							<td class="sl">${sl}</td>
-							<th class="name_col z-[2] name"><input type="text" value="${
+							<th class="name_col z-[2]"><input type="text" value="${
                 prospect.name
               }" onchange="updateName(${prospect.id}, this)"/></th>
 							<td class="weekAdded"><input type="text" placeholder="week" onchange="updateWeekAdded(${
                 prospect.id
               }, this)" value="${prospect.week}" /></td>
-							<td class="zone">
-								<select onchange="updateZone(${prospect.id}, this)">
+							<td>
+								<select class="zone" onchange="updateZone(${prospect.id}, this)">
 									<option ${prospect.zone == "Office" ? "selected" : ""}>Office</option>
 									<option ${prospect.zone == "PG" ? "selected" : ""}>PG</option>
 									<option ${prospect.zone == "School" ? "selected" : ""}>School</option>
@@ -347,19 +109,19 @@ function generateRowNamelistUI(sl, prospect) {
 							<td class="city"><input type="text" placeholder="city" onchange="updateCity(${
                 prospect.id
               }, this)" value="${prospect.city}" /></td>
-							<td class="chatting bl"> <input type="checkbox" class="checkbox" onchange="updateChatting(${
+							<td class="bl"> <input type="checkbox" class="checkbox" onchange="updateChatting(${
                 prospect.id
               }, this)" ${prospect.chatting == true ? "checked" : ""}/></td>
-							<td class="br socialMedia"> <input type="checkbox" class="checkbox" onchange="updateSocialMedia(${
+							<td class="br"> <input type="checkbox" class="checkbox" onchange="updateSocialMedia(${
                 prospect.id
               }, this)" ${prospect.socialMedia == true ? "checked" : ""}/></td>
-							<td class="bl info"> <input type="checkbox" class="checkbox" onchange="updateInfo(${
+							<td class="bl"> <input type="checkbox" class="checkbox" onchange="updateInfo(${
                 prospect.id
               }, this)" ${prospect.info == true ? "checked" : ""}/></td>
-							<td class="weekInfo info"><input type="text" placeholder="week" onchange="updateInfoWeek(${
+							<td class="weekInfo"><input type="text" placeholder="week" onchange="updateInfoWeek(${
                 prospect.id
               }, this)" value="${prospect.infoWeek}"/></td>
-							<td class="br info">
+							<td class="br">
 								<select class="response responseInfo" onchange="updateInfoResponse(${
                   prospect.id
                 }, this)">
@@ -369,13 +131,13 @@ function generateRowNamelistUI(sl, prospect) {
 									<option ${prospect.infoResponse == "C" ? "selected" : ""}>C</option>
 								</select>
 							</td>
-							<td class="bl reinfo"> <input type="checkbox" class="checkbox" onchange="updateReInfo(${
+							<td class="bl"> <input type="checkbox" class="checkbox" onchange="updateReInfo(${
                 prospect.id
               }, this)" ${prospect.reinfo == true ? "checked" : ""}/></td>
-							<td class="weekReinfo reinfo"><input type="text" placeholder="week" onchange="updateReInfoWeek(${
+							<td class="weekReinfo"><input type="text" placeholder="week" onchange="updateReInfoWeek(${
                 prospect.id
               }, this)" value="${prospect.reinfoWeek}"/></td>
-							<td class="br reinfo">
+							<td class="br">
 								<select class="response responseReinfo" onchange="updateReInfoResponse(${
                   prospect.id
                 }, this)">
@@ -385,16 +147,16 @@ function generateRowNamelistUI(sl, prospect) {
 									<option ${prospect.reinfoResponse == "C" ? "selected" : ""}>C</option>
 								</select>
 							</td>
-							<td class="meetup"> <input type="checkbox" class="checkbox" onchange="updateMeetup(${
+							<td> <input type="checkbox" class="checkbox" onchange="updateMeetup(${
                 prospect.id
               }, this)" ${prospect.meetup == true ? "checked" : ""}/></td>
-							<td class="bl invi"> <input type="checkbox" class="checkbox" onchange="updateInvi(${
+							<td class="bl"> <input type="checkbox" class="checkbox" onchange="updateInvi(${
                 prospect.id
               }, this)" ${prospect.invi == true ? "checked" : ""}/></td>
-							<td class="weekInvite invi"><input type="text" placeholder="week" onchange="updateInviWeek(${
+							<td class="weekInvite"><input type="text" placeholder="week" onchange="updateInviWeek(${
                 prospect.id
               }, this)" value="${prospect.inviWeek}"/></td>
-							<td class="br invi">
+							<td class="br">
 								<select class="responseInvite" onchange="updateInviResponse(${
                   prospect.id
                 }, this)">
@@ -403,13 +165,13 @@ function generateRowNamelistUI(sl, prospect) {
 									<option ${prospect.inviResponse == "No" ? "selected" : ""}>No</option>
 								</select>
 							</td>
-							<td class="bl plan"> <input type="checkbox" class="checkbox" onchange="updatePlan(${
+							<td class="bl"> <input type="checkbox" class="checkbox" onchange="updatePlan(${
                 prospect.id
               }, this)" ${prospect.plan == true ? "checked" : ""}/></td>
-							<td class="weekPlan plan"><input type="text" placeholder="week" onchange="updatePlanWeek(${
+							<td class="weekPlan"><input type="text" placeholder="week" onchange="updatePlanWeek(${
                 prospect.id
               }, this)" value="${prospect.planWeek}"/></td>
-							<td class="br plan">
+							<td class="br">
 								<select class="planStatus" onchange="updatePlanStatus(${prospect.id}, this)">
 									<option></option>
 									<option ${prospect.planStatus == "CIP" ? "selected" : ""}>CIP</option>
@@ -428,15 +190,15 @@ function generateRowNamelistUI(sl, prospect) {
               }, this)" value="${prospect.remarks}"/></td>
 							<th>
 								<div class="flex">
-									<div class=""><button class="btn btn-soft btn-sm btn-info p-0 h-7 w-7" onclick="transferProspectToKIV(${
+									<div class=""><button class="btn btn-soft btn-sm btn-accent p-0 h-7 w-7" onclick="transferProspectToNamelist(${
                     prospect.id
                   })"><i
-												class="w-5 h-5" data-lucide="eye"></i></button>
+												class="w-5 h-5" data-lucide="book-user"></i></button>
 									</div>
-									<div class="ml-1"><button class="btn btn-soft btn-sm btn-primary p-0 h-7 w-7" onclick="transferProspectToLL(${
+									<div class="ml-1"><button class="btn btn-soft btn-sm btn-info p-0 h-7 w-7" onclick="transferProspectToKIV(${
                     prospect.id
                   })"><i
-												class="w-5 h-5" data-lucide="snail"></i></button></div>
+												class="w-5 h-5" data-lucide="eye"></i></button></div>
 									<div class="ml-1"><button class="btn btn-soft btn-sm btn-error p-0 h-7 w-7" onclick="removeProspect(${
                     prospect.id
                   })"><i
@@ -702,6 +464,19 @@ function removeProspect(id) {
   removeProspectFB(id, name);
   generateNL(namelist);
 }
+function transferProspectToNamelist(id) {
+  const name = getName(id);
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
+      namelist.splice(i, 1);
+      break;
+    }
+  }
+  transferProspectToNamelistFB(id, name)
+  generateNL(namelist);
+  //Add to KIV list
+}
+
 function transferProspectToKIV(id) {
   const name = getName(id);
   for (let i = 0; i < namelist.length; i++) {
@@ -712,19 +487,6 @@ function transferProspectToKIV(id) {
   }
   transferProspectToKIVFB(id, name);
   generateNL(namelist);
-  //Add to KIV list
-}
-
-function transferProspectToLL(id) {
-  const name = getName(id);
-  for (let i = 0; i < namelist.length; i++) {
-    if (namelist[i].id == id) {
-      namelist.splice(i, 1);
-      break;
-    }
-  }
-  transferProspectToLLFB(id, name);
-  generateNL(namelist);
   //Add to LL list
 }
 
@@ -732,7 +494,7 @@ function transferProspectToLL(id) {
 function addProspectFB(prospect) {
   const data = { prospect: prospect };
   const xhttp = new XMLHttpRequest();
-  xhttp.open("POST", "/namelist/addProspect");
+  xhttp.open("POST", "/latelatif/addProspect");
   xhttp.onload = function () {
     showAlert(this.responseText);
   };
@@ -740,25 +502,20 @@ function addProspectFB(prospect) {
   xhttp.send(JSON.stringify(data));
 }
 
-function showAlert(content, type = "success") {
-  $(".alert")
-    .removeClass("alert-error")
-    .removeClass("alert-info")
-    .removeClass("alert-primary")
-    .removeClass("alert-success")
-    .addClass("alert-" + type)
-    .removeClass("hidden");
+function showAlert(content, type="success"){
+  $(".alert").removeClass("alert-error").removeClass("alert-info").removeClass("alert-primary").removeClass("alert-success").addClass("alert-" + type).removeClass("hidden");
   alertContent.innerHTML = content;
 }
 
 function getNLData() {
   const xhttp = new XMLHttpRequest();
-  xhttp.open("POST", "/namelist/getData");
+  xhttp.open("POST", "/latelatif/getData");
   xhttp.onload = function () {
     const response = JSON.parse(this.responseText);
     namelist = response;
     generateNL(namelist);
     showAlert("Namelist loaded");
+   
   };
   xhttp.setRequestHeader("Content-Type", "application/json");
   xhttp.send();
@@ -767,9 +524,20 @@ function getNLData() {
 function removeProspectFB(id, name) {
   const data = { id: id };
   const xhttp = new XMLHttpRequest();
-  xhttp.open("POST", "/namelist/removeProspect");
+  xhttp.open("POST", "/latelatif/removeProspect");
   xhttp.onload = function () {
     showAlert(name + " removed successfully!", "error");
+  };
+  xhttp.setRequestHeader("Content-Type", "application/json");
+  xhttp.send(JSON.stringify(data));
+}
+
+function transferProspectToNamelistFB(id, name) {
+  const data = { id: id };
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("POST", "/latelatif/transferToNamelist");
+  xhttp.onload = function () {
+    showAlert(name + " transferred to Working Namelist successfully!", "info");
   };
   xhttp.setRequestHeader("Content-Type", "application/json");
   xhttp.send(JSON.stringify(data));
@@ -778,7 +546,7 @@ function removeProspectFB(id, name) {
 function transferProspectToKIVFB(id, name) {
   const data = { id: id };
   const xhttp = new XMLHttpRequest();
-  xhttp.open("POST", "/namelist/transferToKIV");
+  xhttp.open("POST", "/latelatif/transferToKIV");
   xhttp.onload = function () {
     showAlert(name + " transferred to KIV successfully!", "info");
   };
@@ -786,20 +554,9 @@ function transferProspectToKIVFB(id, name) {
   xhttp.send(JSON.stringify(data));
 }
 
-function transferProspectToLLFB(id, name) {
-  const data = { id: id };
-  const xhttp = new XMLHttpRequest();
-  xhttp.open("POST", "/namelist/transferToLL");
-  xhttp.onload = function () {
-    showAlert(name + " transferred to LL successfully!", "info");
-  };
-  xhttp.setRequestHeader("Content-Type", "application/json");
-  xhttp.send(JSON.stringify(data));
-}
-
-function getName(id) {
-  for (let i = 0; i < namelist.length; i++) {
-    if (namelist[i].id == id) {
+function getName(id){
+  for(let i=0; i<namelist.length; i++){
+    if(namelist[i].id == id){
       return namelist[i].name;
     }
   }
@@ -808,7 +565,7 @@ function getName(id) {
 function updateProspectFB(id, fieldName, value, type = "str") {
   const data = { id: id, fieldName: fieldName, value: value, type: type };
   const xhttp = new XMLHttpRequest();
-  xhttp.open("POST", "/namelist/updateProspect");
+  xhttp.open("POST", "/latelatif/updateProspect");
   xhttp.onload = function () {
     showAlert(getName(id) + " updated successfully!");
   };
@@ -844,10 +601,6 @@ function generateNL(namelist) {
       ),
       namelist.length
     );
-  }
-
-  if(isFilter){
-    enableSelectionUI($("#fliterDropDown").val());
   }
 }
 
