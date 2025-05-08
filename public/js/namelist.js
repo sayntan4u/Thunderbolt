@@ -206,6 +206,11 @@ function clearFormAddPerson() {
 }
 
 function setNLCount(count){
+  if(count > 0){
+    $("#pagination").removeClass("hidden");
+  }else{
+    $("#pagination").addClass("hidden");
+  }
   nlCount.innerHTML = count;
   fromProspect.innerHTML = (parseInt(pageNumber.innerHTML) - 1)*10 + 1;
   if(count > parseInt(pageNumber.innerHTML)*10){
