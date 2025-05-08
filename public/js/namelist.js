@@ -48,7 +48,6 @@ class Prospect {
 
 var namelist = [];
 
-
 function generateSortWeekDropDownUI() {
   var weekDropDownUI = "";
   for (var i = 1; i <= 53; i++) {
@@ -92,10 +91,12 @@ function generateRowNamelistUI(sl, prospect) {
   $("#namelistTable").append(`
         						<tr>
 							<td class="sl">${sl}</td>
-							<th class="name_col z-[2]"><input type="text" value="${prospect.name}" onchange="updateName(${prospect.id}, this)"/></th>
-							<td class="weekAdded"><input type="text" placeholder="week" onchange="updateWeekAdded(${prospect.id}, this)" value="${
-                prospect.week
-              }" /></td>
+							<th class="name_col z-[2]"><input type="text" value="${
+                prospect.name
+              }" onchange="updateName(${prospect.id}, this)"/></th>
+							<td class="weekAdded"><input type="text" placeholder="week" onchange="updateWeekAdded(${
+                prospect.id
+              }, this)" value="${prospect.week}" /></td>
 							<td>
 								<select class="zone" onchange="updateZone(${prospect.id}, this)">
 									<option ${prospect.zone == "Office" ? "selected" : ""}>Office</option>
@@ -105,65 +106,71 @@ function generateRowNamelistUI(sl, prospect) {
 									<option ${prospect.zone == "Others" ? "selected" : ""}>Others</option>
 								</select>
 							</td>
-							<td class="city"><input type="text" placeholder="city" onchange="updateCity(${prospect.id}, this)" value="${
-                prospect.city
-              }" /></td>
-							<td class="bl"> <input type="checkbox" class="checkbox" onchange="updateChatting(${prospect.id}, this)" ${
-                prospect.chatting == true ? "checked" : ""
-              }/></td>
-							<td class="br"> <input type="checkbox" class="checkbox" onchange="updateSocialMedia(${prospect.id}, this)" ${
-                prospect.socialMedia == true ? "checked" : ""
-              }/></td>
-							<td class="bl"> <input type="checkbox" class="checkbox" onchange="updateInfo(${prospect.id}, this)" ${
-                prospect.info == true ? "checked" : ""
-              }/></td>
-							<td class="weekInfo"><input type="text" placeholder="week" onchange="updateInfoWeek(${prospect.id}, this)" value="${
-                prospect.infoWeek
-              }"/></td>
+							<td class="city"><input type="text" placeholder="city" onchange="updateCity(${
+                prospect.id
+              }, this)" value="${prospect.city}" /></td>
+							<td class="bl"> <input type="checkbox" class="checkbox" onchange="updateChatting(${
+                prospect.id
+              }, this)" ${prospect.chatting == true ? "checked" : ""}/></td>
+							<td class="br"> <input type="checkbox" class="checkbox" onchange="updateSocialMedia(${
+                prospect.id
+              }, this)" ${prospect.socialMedia == true ? "checked" : ""}/></td>
+							<td class="bl"> <input type="checkbox" class="checkbox" onchange="updateInfo(${
+                prospect.id
+              }, this)" ${prospect.info == true ? "checked" : ""}/></td>
+							<td class="weekInfo"><input type="text" placeholder="week" onchange="updateInfoWeek(${
+                prospect.id
+              }, this)" value="${prospect.infoWeek}"/></td>
 							<td class="br">
-								<select class="response responseInfo" onchange="updateInfoResponse(${prospect.id}, this)">
+								<select class="response responseInfo" onchange="updateInfoResponse(${
+                  prospect.id
+                }, this)">
 									<option></option>
 									<option ${prospect.infoResponse == "A" ? "selected" : ""}>A</option>
 									<option ${prospect.infoResponse == "B" ? "selected" : ""}>B</option>
 									<option ${prospect.infoResponse == "C" ? "selected" : ""}>C</option>
 								</select>
 							</td>
-							<td class="bl"> <input type="checkbox" class="checkbox" onchange="updateReInfo(${prospect.id}, this)" ${
-                prospect.reinfo == true ? "checked" : ""
-              }/></td>
-							<td class="weekReinfo"><input type="text" placeholder="week" onchange="updateReInfoWeek(${prospect.id}, this)" value="${
-                prospect.reinfoWeek
-              }"/></td>
+							<td class="bl"> <input type="checkbox" class="checkbox" onchange="updateReInfo(${
+                prospect.id
+              }, this)" ${prospect.reinfo == true ? "checked" : ""}/></td>
+							<td class="weekReinfo"><input type="text" placeholder="week" onchange="updateReInfoWeek(${
+                prospect.id
+              }, this)" value="${prospect.reinfoWeek}"/></td>
 							<td class="br">
-								<select class="response responseReinfo" onchange="updateReInfoResponse(${prospect.id}, this)">
+								<select class="response responseReinfo" onchange="updateReInfoResponse(${
+                  prospect.id
+                }, this)">
 									<option></option>
 									<option ${prospect.reinfoResponse == "A" ? "selected" : ""}>A</option>
 									<option ${prospect.reinfoResponse == "B" ? "selected" : ""}>B</option>
 									<option ${prospect.reinfoResponse == "C" ? "selected" : ""}>C</option>
 								</select>
 							</td>
-							<td> <input type="checkbox" class="checkbox" onchange="updateMeetup(${prospect.id}, this)" ${
-                prospect.meetup == true ? "checked" : ""
-              }/></td>
-							<td class="bl"> <input type="checkbox" class="checkbox" onchange="updateInvi(${prospect.id}, this)" ${
-                prospect.invi == true ? "checked" : ""
-              }/></td>
-							<td class="weekInvite"><input type="text" placeholder="week" onchange="updateInviWeek(${prospect.id}, this)" value="${
-                prospect.inviWeek
-              }"/></td>
+							<td> <input type="checkbox" class="checkbox" onchange="updateMeetup(${
+                prospect.id
+              }, this)" ${prospect.meetup == true ? "checked" : ""}/></td>
+							<td class="bl"> <input type="checkbox" class="checkbox" onchange="updateInvi(${
+                prospect.id
+              }, this)" ${prospect.invi == true ? "checked" : ""}/></td>
+							<td class="weekInvite"><input type="text" placeholder="week" onchange="updateInviWeek(${
+                prospect.id
+              }, this)" value="${prospect.inviWeek}"/></td>
 							<td class="br">
-								<select class="responseInvite" onchange="updateInviResponse(${prospect.id}, this)">
+								<select class="responseInvite" onchange="updateInviResponse(${
+                  prospect.id
+                }, this)">
 									<option></option>
 									<option ${prospect.inviResponse == "Yes" ? "selected" : ""}>Yes</option>
 									<option ${prospect.inviResponse == "No" ? "selected" : ""}>No</option>
 								</select>
 							</td>
-							<td class="bl"> <input type="checkbox" class="checkbox" onchange="updatePlan(${prospect.id}, this)" ${
-                prospect.plan == true ? "checked" : ""
-              }/></td>
-							<td class="weekPlan"><input type="text" placeholder="week" onchange="updatePlanWeek(${prospect.id}, this)" value="${
-                prospect.planWeek
-              }"/></td>
+							<td class="bl"> <input type="checkbox" class="checkbox" onchange="updatePlan(${
+                prospect.id
+              }, this)" ${prospect.plan == true ? "checked" : ""}/></td>
+							<td class="weekPlan"><input type="text" placeholder="week" onchange="updatePlanWeek(${
+                prospect.id
+              }, this)" value="${prospect.planWeek}"/></td>
 							<td class="br">
 								<select class="planStatus" onchange="updatePlanStatus(${prospect.id}, this)">
 									<option></option>
@@ -178,17 +185,23 @@ function generateRowNamelistUI(sl, prospect) {
                   }>Onboarded</option>
 								</select>
 							</td>
-							<td class="remarks"><input type="text" placeholder="remarks" onchange="updateRemarks(${prospect.id}, this)" value="${
-                prospect.remarks
-              }"/></td>
+							<td class="remarks"><input type="text" placeholder="remarks" onchange="updateRemarks(${
+                prospect.id
+              }, this)" value="${prospect.remarks}"/></td>
 							<th>
 								<div class="flex">
-									<div class=""><button class="btn btn-soft btn-sm btn-info p-0 h-7 w-7" onclick="transferProspectToKIV(${prospect.id})"><i
+									<div class=""><button class="btn btn-soft btn-sm btn-info p-0 h-7 w-7" onclick="transferProspectToKIV(${
+                    prospect.id
+                  })"><i
 												class="w-5 h-5" data-lucide="eye"></i></button>
 									</div>
-									<div class="ml-1"><button class="btn btn-soft btn-sm btn-primary p-0 h-7 w-7" onclick="transferProspectToLL(${prospect.id})"><i
+									<div class="ml-1"><button class="btn btn-soft btn-sm btn-primary p-0 h-7 w-7" onclick="transferProspectToLL(${
+                    prospect.id
+                  })"><i
 												class="w-5 h-5" data-lucide="snail"></i></button></div>
-									<div class="ml-1"><button class="btn btn-soft btn-sm btn-error p-0 h-7 w-7" onclick="removeProspect(${prospect.id})"><i
+									<div class="ml-1"><button class="btn btn-soft btn-sm btn-error p-0 h-7 w-7" onclick="removeProspect(${
+                    prospect.id
+                  })"><i
 												class="w-5 h-5" data-lucide="trash-2"></i></button></div>
 								</div>
 
@@ -205,31 +218,30 @@ function clearFormAddPerson() {
   addPersonCity.value = "";
 }
 
-function setNLCount(count){
-  if(count > 0){
+function setNLCount(count) {
+  if (count > 0) {
     $("#pagination").removeClass("hidden");
-  }else{
+  } else {
     $("#pagination").addClass("hidden");
   }
   nlCount.innerHTML = count;
-  fromProspect.innerHTML = (parseInt(pageNumber.innerHTML) - 1)*10 + 1;
-  if(count > parseInt(pageNumber.innerHTML)*10){
-    toProspect.innerHTML = parseInt(pageNumber.innerHTML)*10;
-  }else{
+  fromProspect.innerHTML = (parseInt(pageNumber.innerHTML) - 1) * 10 + 1;
+  if (count > parseInt(pageNumber.innerHTML) * 10) {
+    toProspect.innerHTML = parseInt(pageNumber.innerHTML) * 10;
+  } else {
     toProspect.innerHTML = count;
   }
 }
 
-
-function goBack(){
-  if(parseInt(pageNumber.innerHTML)>1){
+function goBack() {
+  if (parseInt(pageNumber.innerHTML) > 1) {
     pageNumber.innerHTML = parseInt(pageNumber.innerHTML) - 1;
   }
   generateNL(namelist);
 }
 
-function goForward(){
-  if(parseInt(pageNumber.innerHTML)< namelist.length/10){
+function goForward() {
+  if (parseInt(pageNumber.innerHTML) < namelist.length / 10) {
     pageNumber.innerHTML = parseInt(pageNumber.innerHTML) + 1;
   }
   generateNL(namelist);
@@ -242,7 +254,13 @@ function addPerson() {
   const week = addPersonWeekAdded.value;
   const zone = addPersonZone.value;
 
-  const prospect = new Prospect({id: Date.now(), name : name, week : week, zone : zone, city: city});
+  const prospect = new Prospect({
+    id: Date.now(),
+    name: name,
+    week: week,
+    zone: zone,
+    city: city,
+  });
 
   namelist.push(prospect);
   addProspectFB(prospect);
@@ -253,180 +271,180 @@ function addPerson() {
 }
 
 //updation
-function updateName(id, elem){
-  for(let i=0; i<namelist.length; i++){
-    if(namelist[i].id == id){
+function updateName(id, elem) {
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
       namelist[i].name = $(elem).val();
       updateProspectFB(id, "name", $(elem).val());
       break;
     }
   }
 }
-function updateWeekAdded(id, elem){
-  for(let i=0; i<namelist.length; i++){
-    if(namelist[i].id == id){
+function updateWeekAdded(id, elem) {
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
       namelist[i].week = $(elem).val();
       updateProspectFB(id, "week", $(elem).val());
       break;
     }
   }
 }
-function updateZone(id, elem){
-  for(let i=0; i<namelist.length; i++){
-    if(namelist[i].id == id){
+function updateZone(id, elem) {
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
       namelist[i].zone = $(elem).val();
       updateProspectFB(id, "zone", $(elem).val());
       break;
     }
   }
 }
-function updateCity(id, elem){
-  for(let i=0; i<namelist.length; i++){
-    if(namelist[i].id == id){
+function updateCity(id, elem) {
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
       namelist[i].city = $(elem).val();
       updateProspectFB(id, "city", $(elem).val());
       break;
     }
   }
 }
-function updateChatting(id, elem){
-  for(let i=0; i<namelist.length; i++){
-    if(namelist[i].id == id){
+function updateChatting(id, elem) {
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
       namelist[i].chatting = $(elem).prop("checked");
       updateProspectFB(id, "chatting", $(elem).prop("checked"), "bool");
       break;
     }
   }
 }
-function updateSocialMedia(id, elem){
-  for(let i=0; i<namelist.length; i++){
-    if(namelist[i].id == id){
-      namelist[i].socialMedia =$(elem).prop("checked");
+function updateSocialMedia(id, elem) {
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
+      namelist[i].socialMedia = $(elem).prop("checked");
       updateProspectFB(id, "socialMedia", $(elem).prop("checked"), "bool");
       break;
     }
   }
 }
-function updateInfo(id, elem){
-  for(let i=0; i<namelist.length; i++){
-    if(namelist[i].id == id){
+function updateInfo(id, elem) {
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
       namelist[i].info = $(elem).prop("checked");
       updateProspectFB(id, "info", $(elem).prop("checked"), "bool");
       break;
     }
   }
 }
-function updateInfoWeek(id, elem){
-  for(let i=0; i<namelist.length; i++){
-    if(namelist[i].id == id){
+function updateInfoWeek(id, elem) {
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
       namelist[i].infoWeek = $(elem).val();
       updateProspectFB(id, "infoWeek", $(elem).val());
       break;
     }
   }
 }
-function updateInfoResponse(id, elem){
-  for(let i=0; i<namelist.length; i++){
-    if(namelist[i].id == id){
+function updateInfoResponse(id, elem) {
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
       namelist[i].infoResponse = $(elem).val();
       updateProspectFB(id, "infoResponse", $(elem).val());
       break;
     }
   }
 }
-function updateReInfo(id, elem){
-  for(let i=0; i<namelist.length; i++){
-    if(namelist[i].id == id){
+function updateReInfo(id, elem) {
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
       namelist[i].reinfo = $(elem).prop("checked");
       updateProspectFB(id, "reinfo", $(elem).prop("checked"), "bool");
       break;
     }
   }
 }
-function updateReInfoWeek(id, elem){
-  for(let i=0; i<namelist.length; i++){
-    if(namelist[i].id == id){
+function updateReInfoWeek(id, elem) {
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
       namelist[i].reinfoWeek = $(elem).val();
       updateProspectFB(id, "reinfoWeek", $(elem).val());
       break;
     }
   }
 }
-function updateReInfoResponse(id, elem){
-  for(let i=0; i<namelist.length; i++){
-    if(namelist[i].id == id){
+function updateReInfoResponse(id, elem) {
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
       namelist[i].reinfoResponse = $(elem).val();
       updateProspectFB(id, "reinfoResponse", $(elem).val());
       break;
     }
   }
 }
-function updateMeetup(id, elem){
-  for(let i=0; i<namelist.length; i++){
-    if(namelist[i].id == id){
+function updateMeetup(id, elem) {
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
       namelist[i].meetup = $(elem).prop("checked");
       updateProspectFB(id, "meetup", $(elem).prop("checked"), "bool");
       break;
     }
   }
 }
-function updateInvi(id, elem){
-  for(let i=0; i<namelist.length; i++){
-    if(namelist[i].id == id){
+function updateInvi(id, elem) {
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
       namelist[i].invi = $(elem).prop("checked");
       updateProspectFB(id, "invi", $(elem).prop("checked"), "bool");
       break;
     }
   }
 }
-function updateInviWeek(id, elem){
-  for(let i=0; i<namelist.length; i++){
-    if(namelist[i].id == id){
+function updateInviWeek(id, elem) {
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
       namelist[i].inviWeek = $(elem).val();
       updateProspectFB(id, "inviWeek", $(elem).val());
       break;
     }
   }
 }
-function updateInviResponse(id, elem){
-  for(let i=0; i<namelist.length; i++){
-    if(namelist[i].id == id){
+function updateInviResponse(id, elem) {
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
       namelist[i].inviResponse = $(elem).val();
       updateProspectFB(id, "inviResponse", $(elem).val());
       break;
     }
   }
 }
-function updatePlan(id, elem){
-  for(let i=0; i<namelist.length; i++){
-    if(namelist[i].id == id){
+function updatePlan(id, elem) {
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
       namelist[i].plan = $(elem).prop("checked");
       updateProspectFB(id, "plan", $(elem).prop("checked"), "bool");
       break;
     }
   }
 }
-function updatePlanWeek(id, elem){
-  for(let i=0; i<namelist.length; i++){
-    if(namelist[i].id == id){
+function updatePlanWeek(id, elem) {
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
       namelist[i].planWeek = $(elem).val();
       updateProspectFB(id, "planWeek", $(elem).val());
       break;
     }
   }
 }
-function updatePlanStatus(id, elem){
-  for(let i=0; i<namelist.length; i++){
-    if(namelist[i].id == id){
+function updatePlanStatus(id, elem) {
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
       namelist[i].planStatus = $(elem).val();
       updateProspectFB(id, "planStatus", $(elem).val());
       break;
     }
   }
 }
-function updateRemarks(id, elem){
-  for(let i=0; i<namelist.length; i++){
-    if(namelist[i].id == id){
+function updateRemarks(id, elem) {
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
       namelist[i].remarks = $(elem).val();
       updateProspectFB(id, "remarks", $(elem).val());
       break;
@@ -435,80 +453,130 @@ function updateRemarks(id, elem){
 }
 
 //Actions
-function removeProspect(id){
-  for(let i=0; i<namelist.length; i++){
-    if(namelist[i].id == id){
-      namelist.splice(i,1);
+function removeProspect(id) {
+  const name = getName(id);
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
+      namelist.splice(i, 1);
       break;
     }
   }
-  removeProspectFB(id);
+  removeProspectFB(id, name);
   generateNL(namelist);
-
 }
-function transferProspectToKIV(id){
-  for(let i=0; i<namelist.length; i++){
-    if(namelist[i].id == id){
-      namelist.splice(i,1);
+function transferProspectToKIV(id) {
+  const name = getName(id);
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
+      namelist.splice(i, 1);
       break;
     }
   }
+  transferProspectToKIVFB(id, name)
   generateNL(namelist);
   //Add to KIV list
 }
-function transferProspectToLL(id){
-  for(let i=0; i<namelist.length; i++){
-    if(namelist[i].id == id){
-      namelist.splice(i,1);
+
+function transferProspectToLL(id) {
+  const name = getName(id);
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
+      namelist.splice(i, 1);
       break;
     }
   }
+  transferProspectToLLFB(id, name);
   generateNL(namelist);
   //Add to LL list
 }
 
 //ajax methods
-function addProspectFB(prospect){
-  const data = { prospect : prospect };
+function addProspectFB(prospect) {
+  const data = { prospect: prospect };
   const xhttp = new XMLHttpRequest();
   xhttp.open("POST", "/namelist/addProspect");
+  xhttp.onload = function () {
+    showAlert(this.responseText);
+  };
   xhttp.setRequestHeader("Content-Type", "application/json");
   xhttp.send(JSON.stringify(data));
 }
 
-function getNLData(){
+function showAlert(content, type="success"){
+  $(".alert").removeClass("alert-error").removeClass("alert-info").removeClass("alert-primary").removeClass("alert-success").addClass("alert-" + type).removeClass("hidden");
+  alertContent.innerHTML = content;
+}
+
+function getNLData() {
   const xhttp = new XMLHttpRequest();
   xhttp.open("POST", "/namelist/getData");
   xhttp.onload = function () {
     const response = JSON.parse(this.responseText);
     namelist = response;
     generateNL(namelist);
+    showAlert("Namelist loaded");
+   
   };
   xhttp.setRequestHeader("Content-Type", "application/json");
   xhttp.send();
 }
 
-function removeProspectFB(id){
-  const data = { id : id };
+function removeProspectFB(id, name) {
+  const data = { id: id };
   const xhttp = new XMLHttpRequest();
   xhttp.open("POST", "/namelist/removeProspect");
+  xhttp.onload = function () {
+    showAlert(name + " removed successfully!", "error");
+  };
   xhttp.setRequestHeader("Content-Type", "application/json");
   xhttp.send(JSON.stringify(data));
 }
 
-function updateProspectFB(id, fieldName, value, type = "str"){
-  const data = { id : id , fieldName : fieldName, value : value, type : type};
+function transferProspectToKIVFB(id, name) {
+  const data = { id: id };
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("POST", "/namelist/transferToKIV");
+  xhttp.onload = function () {
+    showAlert(name + " transferred to KIV successfully!", "info");
+  };
+  xhttp.setRequestHeader("Content-Type", "application/json");
+  xhttp.send(JSON.stringify(data));
+}
+
+function transferProspectToLLFB(id, name) {
+  const data = { id: id };
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("POST", "/namelist/transferToLL");
+  xhttp.onload = function () {
+    showAlert(name + " transferred to LL successfully!", "primary");
+  };
+  xhttp.setRequestHeader("Content-Type", "application/json");
+  xhttp.send(JSON.stringify(data));
+}
+
+function getName(id){
+  for(let i=0; i<namelist.length; i++){
+    if(namelist[i].id == id){
+      return namelist[i].name;
+    }
+  }
+}
+
+function updateProspectFB(id, fieldName, value, type = "str") {
+  const data = { id: id, fieldName: fieldName, value: value, type: type };
   const xhttp = new XMLHttpRequest();
   xhttp.open("POST", "/namelist/updateProspect");
+  xhttp.onload = function () {
+    showAlert(getName(id) + " updated successfully!");
+  };
   xhttp.setRequestHeader("Content-Type", "application/json");
   xhttp.send(JSON.stringify(data));
 }
-
 
 //loading
 function loadNameListUI(namelist, count) {
   $("#namelistTable").empty();
-  var sl = 1 + (parseInt(pageNumber.innerHTML)-1)*10;
+  var sl = 1 + (parseInt(pageNumber.innerHTML) - 1) * 10;
   for (let i = 0; i < namelist.length; i++) {
     generateRowNamelistUI(sl, namelist[i]);
     sl++;
@@ -516,11 +584,23 @@ function loadNameListUI(namelist, count) {
   setNLCount(count);
 }
 
-function generateNL(namelist){
-  if(namelist.length > parseInt(pageNumber.innerHTML)*10){
-    loadNameListUI(namelist.slice((parseInt(pageNumber.innerHTML)-1)*10, parseInt(pageNumber.innerHTML)*10), namelist.length);
-  }else{
-    loadNameListUI(namelist.slice((parseInt(pageNumber.innerHTML)-1)*10, namelist.length), namelist.length);
+function generateNL(namelist) {
+  if (namelist.length > parseInt(pageNumber.innerHTML) * 10) {
+    loadNameListUI(
+      namelist.slice(
+        (parseInt(pageNumber.innerHTML) - 1) * 10,
+        parseInt(pageNumber.innerHTML) * 10
+      ),
+      namelist.length
+    );
+  } else {
+    loadNameListUI(
+      namelist.slice(
+        (parseInt(pageNumber.innerHTML) - 1) * 10,
+        namelist.length
+      ),
+      namelist.length
+    );
   }
 }
 
@@ -528,4 +608,3 @@ generateSortWeekDropDownUI();
 
 //loadnamelist
 getNLData();
-

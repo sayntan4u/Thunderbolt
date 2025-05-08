@@ -174,17 +174,31 @@
 							<div id="pagination" class="flex items-center  mt-5 hidden">
 								<div class="flex-none">
 									<div class="join">
-										<button class="join-item btn btn-sm btn-accent p-0 w-8 h-8" onclick="goBack()"><i
-												data-lucide="chevron-left" ></i></button>
-										<button id="pageNumber" class="join-item btn btn-sm text-base-content px-5" disabled>1</button>
-										<button class="join-item btn btn-sm btn-accent p-0 w-8 h-8" onclick="goForward()"><i
-												data-lucide="chevron-right"></i></button>
+										<button class="join-item btn btn-sm btn-accent p-0 w-8 h-8"
+											onclick="goBack()"><i data-lucide="chevron-left"></i></button>
+										<button id="pageNumber" class="join-item btn btn-sm text-base-content px-5"
+											disabled>1</button>
+										<button class="join-item btn btn-sm btn-accent p-0 w-8 h-8"
+											onclick="goForward()"><i data-lucide="chevron-right"></i></button>
 									</div>
 								</div>
 								<div class="flex-none ml-5">
-									<p><span id="fromProspect"></span>-<span id="toProspect"></span> of <b><span id="nlCount">37</span></b> namelist</p>
+									<p><span id="fromProspect"></span>-<span id="toProspect"></span> of <b><span
+												id="nlCount">37</span></b> namelist</p>
 								</div>
+								<div class="flex-1 ">
+									<div role="alert" class="alert alert-success alert-soft w-90 justify-self-end hidden">
+										<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current"
+											fill="none" viewBox="0 0 24 24">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+												d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+										</svg>
+										<span id="alertContent"></span>
+									</div>
+								</div>
+								
 							</div>
+
 
 
 						</div>

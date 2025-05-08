@@ -23,16 +23,31 @@ router.post("/getData", requireAuth, async function (req, res) {
 router.post("/addProspect", requireAuth, function (req, res) {
   const { prospect } = req.body;
   nlm.addProspect(prospect);
+  res.send(prospect.name + " added successfully!");
 });
 
 router.post("/removeProspect", requireAuth, function (req, res) {
   const { id } = req.body;
   nlm.removeProspect(id);
+  res.send("Prospect removed successfully!");
 });
 
 router.post("/updateProspect", requireAuth, function (req, res) {
   const { id, fieldName, value, type } = req.body;
   nlm.updateProspect(id, fieldName, value, type);
+  res.send(`${id} - ${fieldName} updated successfully!`);
+});
+
+router.post("/transferToKIV", requireAuth, function (req, res) {
+  const { id } = req.body;
+  nlm.transfer(id, "namelist", "kiv");
+  res.send("Prospect transferred successfully!");
+});
+
+router.post("/transferToLL", requireAuth, function (req, res) {
+  const { id } = req.body;
+  nlm.transfer(id, "namelist", "ll");
+  res.send("Prospect transferred successfully!");
 });
 
 module.exports = router;
