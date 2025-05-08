@@ -1,6 +1,6 @@
 class Prospect {
   constructor({
-    id = Math.floor(Math.random() * 100000000000),
+    id,
     name,
     week,
     zone,
@@ -46,29 +46,8 @@ class Prospect {
   }
 }
 
-//testing
+var namelist = [];
 
-const p1 = new Prospect({name : "Gangotri Mandava", week : 18, zone: "Office"});
-const p2 = new Prospect({name : "Anjusree Gunji", week : 18, zone: "PG"});
-const p3 = new Prospect({name : "Srividya Tikka", week : 18, zone: "Office"});
-
-const namelist = [];
-
-namelist.push(p1);
-namelist.push(p2);
-namelist.push(p3);
-namelist.push(new Prospect({name : "Gangotri Mandava", week : 18, zone: "Office"}));
-namelist.push(new Prospect({name : "Gangotri Mandava", week : 18, zone: "Office"}));
-namelist.push(new Prospect({name : "Anjusree Gunji", week : 18, zone: "PG"}));
-namelist.push(new Prospect({name : "Gangotri Mandava", week : 18, zone: "Office"}));
-namelist.push(new Prospect({name : "Gangotri Mandava", week : 18, zone: "Office"}));
-namelist.push(new Prospect({name : "Gangotri Mandava", week : 18, zone: "Office"}));
-namelist.push(new Prospect({name : "Anjusree Gunji", week : 18, zone: "PG"}));
-namelist.push(new Prospect({name : "Gangotri Mandava", week : 18, zone: "Office"}));
-namelist.push(new Prospect({name : "Anjusree Gunji", week : 18, zone: "PG"}));
-namelist.push(new Prospect({name : "Gangotri Mandava", week : 18, zone: "Office"}));
-namelist.push(new Prospect({name : "Srividya Tikka", week : 18, zone: "Office"}));
-namelist.push(new Prospect({name : "Gangotri Mandava", week : 18, zone: "Office"}));
 
 function generateSortWeekDropDownUI() {
   var weekDropDownUI = "";
@@ -258,8 +237,11 @@ function addPerson() {
   const week = addPersonWeekAdded.value;
   const zone = addPersonZone.value;
 
-  const prospect = new Prospect({name : name, week : week, zone : zone, city: city});
+  const prospect = new Prospect({id: Date.now(), name : name, week : week, zone : zone, city: city});
+
   namelist.push(prospect);
+  addProspectFB(prospect);
+
   clearFormAddPerson();
 
   generateNL(namelist);
@@ -267,13 +249,10 @@ function addPerson() {
 
 //updation
 function updateName(id, elem){
-  console.log("Name")
-  console.log(id);
-  console.log($(elem).val());
-
   for(let i=0; i<namelist.length; i++){
     if(namelist[i].id == id){
       namelist[i].name = $(elem).val();
+      updateProspectFB(id, "name", $(elem).val());
       break;
     }
   }
@@ -282,6 +261,7 @@ function updateWeekAdded(id, elem){
   for(let i=0; i<namelist.length; i++){
     if(namelist[i].id == id){
       namelist[i].week = $(elem).val();
+      updateProspectFB(id, "week", $(elem).val());
       break;
     }
   }
@@ -290,6 +270,7 @@ function updateZone(id, elem){
   for(let i=0; i<namelist.length; i++){
     if(namelist[i].id == id){
       namelist[i].zone = $(elem).val();
+      updateProspectFB(id, "zone", $(elem).val());
       break;
     }
   }
@@ -298,6 +279,7 @@ function updateCity(id, elem){
   for(let i=0; i<namelist.length; i++){
     if(namelist[i].id == id){
       namelist[i].city = $(elem).val();
+      updateProspectFB(id, "city", $(elem).val());
       break;
     }
   }
@@ -306,6 +288,7 @@ function updateChatting(id, elem){
   for(let i=0; i<namelist.length; i++){
     if(namelist[i].id == id){
       namelist[i].chatting = $(elem).prop("checked");
+      updateProspectFB(id, "chatting", $(elem).prop("checked"), "bool");
       break;
     }
   }
@@ -314,6 +297,7 @@ function updateSocialMedia(id, elem){
   for(let i=0; i<namelist.length; i++){
     if(namelist[i].id == id){
       namelist[i].socialMedia =$(elem).prop("checked");
+      updateProspectFB(id, "socialMedia", $(elem).prop("checked"), "bool");
       break;
     }
   }
@@ -322,6 +306,7 @@ function updateInfo(id, elem){
   for(let i=0; i<namelist.length; i++){
     if(namelist[i].id == id){
       namelist[i].info = $(elem).prop("checked");
+      updateProspectFB(id, "info", $(elem).prop("checked"), "bool");
       break;
     }
   }
@@ -330,6 +315,7 @@ function updateInfoWeek(id, elem){
   for(let i=0; i<namelist.length; i++){
     if(namelist[i].id == id){
       namelist[i].infoWeek = $(elem).val();
+      updateProspectFB(id, "infoWeek", $(elem).val());
       break;
     }
   }
@@ -338,6 +324,7 @@ function updateInfoResponse(id, elem){
   for(let i=0; i<namelist.length; i++){
     if(namelist[i].id == id){
       namelist[i].infoResponse = $(elem).val();
+      updateProspectFB(id, "infoResponse", $(elem).val());
       break;
     }
   }
@@ -346,6 +333,7 @@ function updateReInfo(id, elem){
   for(let i=0; i<namelist.length; i++){
     if(namelist[i].id == id){
       namelist[i].reinfo = $(elem).prop("checked");
+      updateProspectFB(id, "reinfo", $(elem).prop("checked"), "bool");
       break;
     }
   }
@@ -353,7 +341,8 @@ function updateReInfo(id, elem){
 function updateReInfoWeek(id, elem){
   for(let i=0; i<namelist.length; i++){
     if(namelist[i].id == id){
-      namelist[i].infoWeek = $(elem).val();
+      namelist[i].reinfoWeek = $(elem).val();
+      updateProspectFB(id, "reinfoWeek", $(elem).val());
       break;
     }
   }
@@ -361,7 +350,8 @@ function updateReInfoWeek(id, elem){
 function updateReInfoResponse(id, elem){
   for(let i=0; i<namelist.length; i++){
     if(namelist[i].id == id){
-      namelist[i].infoResponse = $(elem).val();
+      namelist[i].reinfoResponse = $(elem).val();
+      updateProspectFB(id, "reinfoResponse", $(elem).val());
       break;
     }
   }
@@ -370,6 +360,7 @@ function updateMeetup(id, elem){
   for(let i=0; i<namelist.length; i++){
     if(namelist[i].id == id){
       namelist[i].meetup = $(elem).prop("checked");
+      updateProspectFB(id, "meetup", $(elem).prop("checked"), "bool");
       break;
     }
   }
@@ -378,6 +369,7 @@ function updateInvi(id, elem){
   for(let i=0; i<namelist.length; i++){
     if(namelist[i].id == id){
       namelist[i].invi = $(elem).prop("checked");
+      updateProspectFB(id, "invi", $(elem).prop("checked"), "bool");
       break;
     }
   }
@@ -386,6 +378,7 @@ function updateInviWeek(id, elem){
   for(let i=0; i<namelist.length; i++){
     if(namelist[i].id == id){
       namelist[i].inviWeek = $(elem).val();
+      updateProspectFB(id, "inviWeek", $(elem).val());
       break;
     }
   }
@@ -394,6 +387,7 @@ function updateInviResponse(id, elem){
   for(let i=0; i<namelist.length; i++){
     if(namelist[i].id == id){
       namelist[i].inviResponse = $(elem).val();
+      updateProspectFB(id, "inviResponse", $(elem).val());
       break;
     }
   }
@@ -402,6 +396,7 @@ function updatePlan(id, elem){
   for(let i=0; i<namelist.length; i++){
     if(namelist[i].id == id){
       namelist[i].plan = $(elem).prop("checked");
+      updateProspectFB(id, "plan", $(elem).prop("checked"), "bool");
       break;
     }
   }
@@ -410,6 +405,7 @@ function updatePlanWeek(id, elem){
   for(let i=0; i<namelist.length; i++){
     if(namelist[i].id == id){
       namelist[i].planWeek = $(elem).val();
+      updateProspectFB(id, "planWeek", $(elem).val());
       break;
     }
   }
@@ -418,6 +414,7 @@ function updatePlanStatus(id, elem){
   for(let i=0; i<namelist.length; i++){
     if(namelist[i].id == id){
       namelist[i].planStatus = $(elem).val();
+      updateProspectFB(id, "planStatus", $(elem).val());
       break;
     }
   }
@@ -426,6 +423,7 @@ function updateRemarks(id, elem){
   for(let i=0; i<namelist.length; i++){
     if(namelist[i].id == id){
       namelist[i].remarks = $(elem).val();
+      updateProspectFB(id, "remarks", $(elem).val());
       break;
     }
   }
@@ -439,6 +437,7 @@ function removeProspect(id){
       break;
     }
   }
+  removeProspectFB(id);
   generateNL(namelist);
 
 }
@@ -461,6 +460,43 @@ function transferProspectToLL(id){
   }
   generateNL(namelist);
   //Add to LL list
+}
+
+//ajax methods
+function addProspectFB(prospect){
+  const data = { prospect : prospect };
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("POST", "/namelist/addProspect");
+  xhttp.setRequestHeader("Content-Type", "application/json");
+  xhttp.send(JSON.stringify(data));
+}
+
+function getNLData(){
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("POST", "/namelist/getData");
+  xhttp.onload = function () {
+    const response = JSON.parse(this.responseText);
+    namelist = response;
+    generateNL(namelist);
+  };
+  xhttp.setRequestHeader("Content-Type", "application/json");
+  xhttp.send();
+}
+
+function removeProspectFB(id){
+  const data = { id : id };
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("POST", "/namelist/removeProspect");
+  xhttp.setRequestHeader("Content-Type", "application/json");
+  xhttp.send(JSON.stringify(data));
+}
+
+function updateProspectFB(id, fieldName, value, type = "str"){
+  const data = { id : id , fieldName : fieldName, value : value, type : type};
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("POST", "/namelist/updateProspect");
+  xhttp.setRequestHeader("Content-Type", "application/json");
+  xhttp.send(JSON.stringify(data));
 }
 
 
@@ -486,5 +522,5 @@ function generateNL(namelist){
 generateSortWeekDropDownUI();
 
 //loadnamelist
-generateNL(namelist);
+getNLData();
 
