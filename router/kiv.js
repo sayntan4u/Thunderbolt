@@ -16,37 +16,43 @@ router.get("/", requireAuth, function (req, res) {
 });
 
 router.post("/getData", requireAuth, async function (req, res) {
-  const nl = await nlm.getData("kiv");
+   const uid = req.session.userId.uid;
+  const nl = await nlm.getData(uid, "kiv");
   res.send(nl);
 });
 
 router.post("/addProspect", requireAuth, function (req, res) {
   const { prospect } = req.body;
-  nlm.addProspect(prospect, "kiv");
+   const uid = req.session.userId.uid;
+  nlm.addProspect(uid, prospect, "kiv");
   res.send(prospect.name + " added successfully!");
 });
 
 router.post("/removeProspect", requireAuth, function (req, res) {
   const { id } = req.body;
-  nlm.removeProspect(id, "kiv");
+   const uid = req.session.userId.uid;
+  nlm.removeProspect(uid,id, "kiv");
   res.send("Prospect removed successfully!");
 });
 
 router.post("/updateProspect", requireAuth, function (req, res) {
   const { id, fieldName, value, type } = req.body;
-  nlm.updateProspect(id, fieldName, value, type, "kiv");
+   const uid = req.session.userId.uid;
+  nlm.updateProspect(uid, id, fieldName, value, type, "kiv");
   res.send(`${id} - ${fieldName} updated successfully!`);
 });
 
 router.post("/transferToLL", requireAuth, function (req, res) {
   const { id } = req.body;
-  nlm.transfer(id, "kiv", "ll");
+   const uid = req.session.userId.uid;
+  nlm.transfer(uid, id, "kiv", "ll");
   res.send("Prospect transferred successfully!");
 });
 
 router.post("/transferToNamelist", requireAuth, function (req, res) {
   const { id } = req.body;
-  nlm.transfer(id, "kiv", "namelist");
+   const uid = req.session.userId.uid;
+  nlm.transfer(uid, id, "kiv", "namelist");
   res.send("Prospect transferred successfully!");
 });
 

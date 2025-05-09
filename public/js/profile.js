@@ -220,7 +220,7 @@ function changePassFB(pass) {
 }
 
 function saveAvatarFB(avID) {
-  const data = { uid: uid.innerHTML, avID: avID };
+  const data = { avID: avID };
   const xhttp = new XMLHttpRequest();
   xhttp.open("POST", "/user/setAvatarId");
   xhttp.onload = function () {};

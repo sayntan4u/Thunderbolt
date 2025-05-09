@@ -43,7 +43,7 @@ tbody input[type="text"]:focus {
 }
 
 .remarks input[type="text"] {
-  width: 150px !important;
+  width: 300px !important;
   background-color: transparent !important;
   /* text-align: center !important; */
   font-size: 12px !important;

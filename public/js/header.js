@@ -13,7 +13,6 @@ if (localStorage.getItem("darkMode") === "true") {
 }
 
 function getAvatarId() {
-  const data = { uid: uid.innerHTML };
   const xhttp = new XMLHttpRequest();
   xhttp.open("POST", "/user/getAvatarId");
   xhttp.onload = function () {
@@ -27,7 +26,7 @@ function getAvatarId() {
     $("#avatar_profile").attr("src", `images/avatars/${selectedAvatarId}.avif`);
   };
   xhttp.setRequestHeader("Content-Type", "application/json");
-  xhttp.send(JSON.stringify(data));
+  xhttp.send();
 }
 
 function changeTheme() {
