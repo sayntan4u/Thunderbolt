@@ -229,7 +229,7 @@ function saveAvatarFB(avID) {
 }
 
 function updateProfileFB(name, phone) {
-  const data = { uid: uid.innerHTML, name: name, phone: phone };
+  const data = { name: name, phone: phone };
   const xhttp = new XMLHttpRequest();
   xhttp.open("POST", "/user/updateUser");
   xhttp.onload = function () {
