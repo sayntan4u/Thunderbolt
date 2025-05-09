@@ -46,8 +46,13 @@ $("#editProfileBtn").click(function () {
 });
 
 $("#updateProfileBtn").click(function () {
-  $("#profileName").html($("#updateProfileName").val());
-  $("#profilePhone").html($("#updateProfilePhone").val());
+  const name = $("#updateProfileName").val();
+  const phone = $("#updateProfilePhone").val();
+  updateProfileFB(name, phone)
+  $("#profileName").html(name);
+  $("#navMenuName").html(name);
+  $("#profilePhone").html(phone);
+
 });
 
 $(document).on("click", ".avatar_thunder", function (e) {
@@ -65,12 +70,19 @@ $(document).on("click", ".avatar_thunder", function (e) {
 });
 
 function saveAvatarFB(avID) {
-  const data = { uid: uid.innerHTML , avID : avID};
+  const data = { uid: uid.innerHTML, avID: avID };
   const xhttp = new XMLHttpRequest();
   xhttp.open("POST", "/user/setAvatarId");
-  xhttp.onload = function () {
-    
-  };
+  xhttp.onload = function () {};
+  xhttp.setRequestHeader("Content-Type", "application/json");
+  xhttp.send(JSON.stringify(data));
+}
+
+function updateProfileFB(name, phone) {
+  const data = { uid: uid.innerHTML, name: name, phone : phone };
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("POST", "/user/updateUser");
+  xhttp.onload = function () {};
   xhttp.setRequestHeader("Content-Type", "application/json");
   xhttp.send(JSON.stringify(data));
 }
