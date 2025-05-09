@@ -12,7 +12,7 @@ const requireAuth = (req, res, next) => {
 };
 
 router.post("/getAvatarId", requireAuth, async function (req, res) {
-  const  uid  = req.session.userId.uid;
+  const uid  = req.session.userId.uid;
   const avID = await userm.getAvatarID(uid);
   res.send(avID);
 });
