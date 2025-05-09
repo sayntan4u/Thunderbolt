@@ -25,11 +25,19 @@ router.post("/setAvatarId", requireAuth, async function (req, res) {
 
 router.post("/updateUser", requireAuth, async function (req, res) {
   const ret = await authm.updateUser(req);
-  if (ret == 0) {
-    res.send("success");
-  } else {
-    res.send("error");
-  }
+  // console.log(ret);
+  res.send(ret);
 });
+
+router.post("/checkPass", requireAuth, async function (req, res) {
+  const result = await authm.isCorrectPass(req);
+  res.send(result);
+});
+
+router.post("/changePass", requireAuth, async function (req, res) {
+  const result = await authm.changePass(req);
+  res.send(result);
+});
+
 
 module.exports = router;

@@ -15,9 +15,9 @@
 <body>
 
 	<%- include('components/header.ejs'); -%>
-	<%- include('components/sidebar.ejs'); -%>
+		<%- include('components/sidebar.ejs'); -%>
 
-		<div class="wrapper flex mt-18 ml-25 mr-5">
+			<div class="wrapper flex mt-18 ml-25 mr-5">
 				<div class="container grow mx-auto">
 					<!-- Content goes here-->
 
@@ -25,7 +25,7 @@
 						<div class="card-body">
 							<div class="absolute top-5 right-5">
 								<button id="editProfileBtn" class="btn btn-primary h-8 w-8 p-0"><i
-									data-lucide="pen-line" style="width: 18px; height: 18px;"></i></button>
+										data-lucide="pen-line" style="width: 18px; height: 18px;"></i></button>
 							</div>
 							<div class="card-body">
 								<div class="flex w-full flex-col gap-4">
@@ -43,15 +43,19 @@
 
 										<div class="flex flex-col gap-4 w-full">
 											<div class="flex h-12 w-full items-center justify-between">
-												<span id="profileName" class="text-4xl"><%= user.displayName %></span>
-												
+												<span id="profileName" class="text-4xl">
+													<%= user.displayName %>
+												</span>
+
 											</div>
 											<div class="h-2 w-full flex text-[14px] items-center">
 												<div class="flex-none items-center">
 													<i data-lucide="mail" class="h-4 w-4"></i>
 												</div>
 												<div class="flex-1 ml-1">
-													<span id="profileEmail" class="flex-1"><%= user.email %></span>
+													<span id="profileEmail" class="flex-1">
+														<%= user.email %>
+													</span>
 												</div>
 											</div>
 											<div class="h-4 w-full flex text-[14px] items-center">
@@ -59,7 +63,9 @@
 													<i data-lucide="phone" class="h-4 w-4"></i>
 												</div>
 												<div class="flex-1 ml-1">
-													<span id="profilePhone" class="flex-1"><%= user.phoneNumber %></span>
+													<span id="profilePhone" class="flex-1">
+														<%= user.phoneNumber %>
+													</span>
 												</div>
 											</div>
 											<div class="h-4 w-30">
@@ -85,13 +91,43 @@
 
 
 									</div>
+									<div id="profileUpdateSuccessAlert" role="alert"
+										class="flex alert alert-success hidden">
+										<div class="flex-none">
+											<svg xmlns="http://www.w3.org/2000/svg"
+												class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+													d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+											</svg>
+										</div>
+										<div class="flex-1">
+											<span>Your details has been updated!</span>
+										</div>
+
+
+									</div>
+									<div id="profileUpdateErrorAlert" role="alert"
+										class="flex alert alert-error hidden">
+										<div class="flex-none">
+											<svg xmlns="http://www.w3.org/2000/svg"
+												class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+													d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+											</svg>
+										</div>
+										<div class="flex-1">
+											<span id="errAlertTextProfile"></span>
+										</div>
+
+
+									</div>
 								</div>
 
 							</div>
 
 						</div>
 					</div>
-					<div class="card card-border w-full bg-base-100 mt-4 shadow-sm">
+					<div class="password-card card card-border w-full bg-base-100 mt-4 shadow-sm">
 						<div class="card-body">
 							<h2 class="card-title">Change password</h2>
 							<div class="flex flex-row items-end gap-4">
@@ -99,25 +135,71 @@
 								<div class="flex-1">
 									<fieldset class="fieldset">
 										<legend class="fieldset-legend">Current password</legend>
-										<input type="password" class="input" placeholder="Enter current password" />
+										<label class="input">
+											<input type="password" class="grow" placeholder="Enter current password"
+												onchange="checkCurrPass(this)" id="currPass"/>
+											<span id="currPassVerifiedSpan">
 
+											</span>
+										</label>
 									</fieldset>
 								</div>
 								<div class="flex-1">
 									<fieldset class="fieldset">
 										<legend class="fieldset-legend">New password</legend>
-										<input type="password" class="input" placeholder="Enter new password" />
-
+										<label class="input">
+											<input id="newPass" type="password" class="grow"
+												placeholder="Enter new password" onkeyup="checkIsLegit(this)" />
+											<span id="newPassVerifiedSpan">
+												<!-- <i class="text-success" data-lucide="circle-check"></i> -->
+											</span>
+										</label>
 									</fieldset>
 								</div>
 								<div class="flex-1">
 									<fieldset class="fieldset">
 										<legend class="fieldset-legend">Confirm password</legend>
-										<input type="password" class="input" placeholder="Re-enter new password" />
-
+										<label class="input">
+											<input type="password" class="grow" id="confPass"
+												placeholder="Re-enter current password"
+												onkeyup="checkIsMatchingConfPass(this)" />
+											<span id="confPassVerifiedSpan">
+												<!-- <i class="text-success" data-lucide="circle-check"></i> -->
+											</span>
+										</label>
 									</fieldset>
 								</div>
-								<div class="flex-1 pb-1"><button class="btn btn-primary">Change password</button></div>
+								<div class="flex-1 pb-1">
+									<button id="changePassBtn" class="btn btn-primary" disabled>Change password</button>
+								</div>
+							</div>
+							<div id="passUpdateSuccessAlert" role="alert" class="flex alert alert-success hidden">
+								<div class="flex-none">
+									<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current"
+										fill="none" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+											d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+									</svg>
+								</div>
+								<div class="flex-1">
+									<span>Your password has been changed!</span>
+								</div>
+
+
+							</div>
+							<div id="passUpdateErrorAlert" role="alert" class="flex alert alert-error hidden">
+								<div class="flex-none">
+									<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current"
+										fill="none" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+											d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+									</svg>
+								</div>
+								<div class="flex-1">
+									<span div="errAlertTextPass"></span>
+								</div>
+
+
 							</div>
 						</div>
 					</div>
@@ -138,76 +220,80 @@
 
 						</div>
 					</div>
-					
+
 					<!-- Content ends here-->
 				</div>
-		</div>
-		<!-- Modal -->
-		<dialog id="changeAvatarModal" class="modal">
-			<div class="modal-box w-11/12 max-w-3xl">
-				<h3 class="text-lg font-bold">Change avatar</h3>
-				<div class="flex">
-					<div class="flex-none">
-						<div class="h-50 w-50 shrink-0 mask mask-squircle mt-5">
-							<img id="changeAvatarModal_avatar_selected" src="images/avatars/1.avif" />
-						</div>
-					</div>
-					<div class="flex-1 px-10">
-						<span class="text-sm mt-5">Choose an avatar from the list below</span>
-						<div id="avatarList" class="grid grid-cols-5 gap-4 mt-3">
-							<div class="h-20 w-20 shrink-0 mask mask-circle">
-								<img class="avatar_thunder border-4 border-purple-500" src="images/avatars/1.avif" />
+			</div>
+			<!-- Modal -->
+			<dialog id="changeAvatarModal" class="modal">
+				<div class="modal-box w-11/12 max-w-3xl">
+					<h3 class="text-lg font-bold">Change avatar</h3>
+					<div class="flex">
+						<div class="flex-none">
+							<div class="h-50 w-50 shrink-0 mask mask-squircle mt-5">
+								<img id="changeAvatarModal_avatar_selected" src="images/avatars/1.avif" />
 							</div>
 						</div>
+						<div class="flex-1 px-10">
+							<span class="text-sm mt-5">Choose an avatar from the list below</span>
+							<div id="avatarList" class="grid grid-cols-5 gap-4 mt-3">
+								<div class="h-20 w-20 shrink-0 mask mask-circle">
+									<img class="avatar_thunder border-4 border-purple-500"
+										src="images/avatars/1.avif" />
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+
+
+					<div class="modal-action">
+
+						<form method="dialog">
+							<!-- if there is a button in form, it will close the modal -->
+
+							<button class="btn btn-neutral">Close</button>
+							<button id="saveChangeAvatar" class="btn btn-primary">Save changes</button>
+						</form>
 					</div>
 
 				</div>
+				<form method="dialog" class="modal-backdrop">
+					<button>close</button>
+				</form>
+			</dialog>
+			<dialog id="updateProfileModal" class="modal">
+				<div class="modal-box">
+					<h3 class="text-lg font-bold">Update Profile</h3>
+					<fieldset class="fieldset w-full p-4">
+						<label class="label">Name</label>
+						<input id="updateProfileName" type="text" class="input w-full" placeholder="Enter your name" />
 
+						<label class="label">Email</label>
+						<input id="updateProfileEmail" type="email" class="input w-full" placeholder="Enter your email"
+							disabled />
 
+						<label class="label">Phone</label>
+						<input id="updateProfilePhone" type="text" class="input w-full"
+							placeholder="Enter your phone number" />
 
-				<div class="modal-action">
+					</fieldset>
+					<div class="modal-action">
+						<form method="dialog">
+							<!-- if there is a button in form, it will close the modal -->
+							<button class="btn btn-neutral">Close</button>
+							<button id="updateProfileBtn" class="btn btn-primary">Update profile</button>
+						</form>
+					</div>
 
-					<form method="dialog">
-						<!-- if there is a button in form, it will close the modal -->
-
-						<button class="btn btn-neutral">Close</button>
-						<button id="saveChangeAvatar" class="btn btn-primary">Save changes</button>
-					</form>
 				</div>
-
-			</div>
-			<form method="dialog" class="modal-backdrop">
-				<button>close</button>
-			</form>
-		</dialog>
-		<dialog id="updateProfileModal" class="modal">
-			<div class="modal-box">
-				<h3 class="text-lg font-bold">Update Profile</h3>
-				<fieldset class="fieldset w-full p-4">
-					<label class="label">Name</label>
-					<input id="updateProfileName" type="text" class="input w-full" placeholder="Enter your name" />
-
-					<label class="label">Email</label>
-					<input id="updateProfileEmail" type="email" class="input w-full" placeholder="Enter your email" disabled/>
-
-					<label class="label">Phone</label>
-					<input id="updateProfilePhone" type="text" class="input w-full" placeholder="Enter your phone number" />
-				</fieldset>
-				<div class="modal-action">
-					<form method="dialog">
-						<!-- if there is a button in form, it will close the modal -->
-						<button class="btn btn-neutral">Close</button>
-						<button id="updateProfileBtn" class="btn btn-primary">Update profile</button>
-					</form>
-				</div>
-
-			</div>
-			<form method="dialog" class="modal-backdrop">
-				<button>close</button>
-			</form>
-		</dialog>
-		<%- include('components/scripts.ejs'); -%>
-			<script src="js/profile.js"></script>
+				<form method="dialog" class="modal-backdrop">
+					<button>close</button>
+				</form>
+			</dialog>
+			<%- include('components/scripts.ejs'); -%>
+				<script src="js/profile.js"></script>
 
 </body>
 

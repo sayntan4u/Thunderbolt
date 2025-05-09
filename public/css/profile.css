@@ -16,3 +16,6 @@
     background-repeat: no-repeat;
 }
 
+.password-card .input{
+  outline: none;
+}
