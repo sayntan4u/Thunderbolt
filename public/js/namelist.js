@@ -104,6 +104,12 @@ function enableSelectionUI(value) {
   if (value == "Social Media") {
     $(".socialMedia").addClass("searchedField");
   }
+   if (value == "Stage 1") {
+    $(".stage1").addClass("searchedField");
+  }
+   if (value == "Stage 2") {
+    $(".stage2").addClass("searchedField");
+  }
   if (value == "Info") {
     $(".info").addClass("searchedField");
   }
@@ -381,13 +387,13 @@ function generateRowNamelistUI(sl, prospect) {
               <td class="bl stage1"> <input type="checkbox" class="checkbox" onchange="updateStage1(${
                 prospect.id
               }, this)" ${prospect.stage1 == true ? "checked" : ""}/></td>
-              <td class="br weekStage2"><input type="text" placeholder="week" onchange="updateStage1Week(${
+              <td class="br weekStage1 stage1"><input type="text" placeholder="week" onchange="updateStage1Week(${
                 prospect.id
               }, this)" value="${prospect.stage1Week}"/></td>
               <td class="bl stage2"> <input type="checkbox" class="checkbox" onchange="updateStage2(${
                 prospect.id
               }, this)" ${prospect.stage2 == true ? "checked" : ""}/></td>
-              <td class="br weekStage1"><input type="text" placeholder="week" onchange="updateStage2Week(${
+              <td class="br weekStage2 stage2"><input type="text" placeholder="week" onchange="updateStage2Week(${
                 prospect.id
               }, this)" value="${prospect.stage2Week}"/></td>
 
