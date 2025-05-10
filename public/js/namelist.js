@@ -155,8 +155,11 @@ function filterValueChanged(elem) {
   } else if ($(elem).val() == "City") {
     $("#sortCity").parent().removeClass("hidden");
   } else if (
+    
     $(elem).val() == "Chatting" ||
     $(elem).val() == "Social Media" ||
+    $(elem).val() == "Stage 1" ||
+    $(elem).val() == "Stage 2" ||
     $(elem).val() == "Info" ||
     $(elem).val() == "Reinfo" ||
     $(elem).val() == "Meetup" ||
@@ -279,6 +282,20 @@ function searchByDonePending(elem) {
     if ($("#fliterDropDown").val() == "Social Media") {
       for (let i = 0; i < namelist.length; i++) {
         if (namelist[i].socialMedia == getTF(donePending)) {
+          searchedNL.push(namelist[i]);
+        }
+      }
+    }
+    if ($("#fliterDropDown").val() == "Stage 1") {
+      for (let i = 0; i < namelist.length; i++) {
+        if (namelist[i].stage1 == getTF(donePending)) {
+          searchedNL.push(namelist[i]);
+        }
+      }
+    }
+    if ($("#fliterDropDown").val() == "Stage 2") {
+      for (let i = 0; i < namelist.length; i++) {
+        if (namelist[i].stage2 == getTF(donePending)) {
           searchedNL.push(namelist[i]);
         }
       }
