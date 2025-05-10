@@ -18,7 +18,7 @@
 
 
 	<div class="container-login">
-		<div class="card card-border bg-base-100 w-230 mx-auto shadow-xl" data-theme="dark">
+		<div class="card card-border bg-base-100 w-230 mx-auto shadow-xl" data-theme="light" >
 			<div class="card-body pb-30 pt-15">
 				<div class="flex w-full items-center justify-center">
 					<div class="flex-none">
@@ -30,7 +30,7 @@
 				</div>
 				<div class="flex w-full mt-8 items-center px-20">
 					<div class="flex-1">
-						<img class="h-60 ml-5" src="images/img-01.png" alt="IMG">
+						<img class="h-100" src="images/lion1.png" alt="IMG">
 					</div>
 					<div class="flex-1">
 						<div class="tabs tabs-lift tabs-bottom w-full h-105 ">
@@ -39,7 +39,7 @@
 								<fieldset class="fieldset mt-2">
 									<legend class="fieldset-legend">Email</legend>
 									<label class="input">
-										<i data-lucide="mail"></i>
+										<i class="" data-lucide="mail"></i>
 										<input id="loginEmail" class="input" type="email" placeholder="enter email"
 											onkeyup="checkValidEmailLogin(this)" />
 										<span id="loginEmailValidator">
@@ -60,7 +60,7 @@
 								</fieldset>
 
 								<div class="mt-14 ">
-									<button id="btnLogin" class="btn btn-block btn-accent py-5">Login</button>
+									<button id="btnLogin" class="btn btn-block btn-primary py-5">Login</button>
 								</div>
 								<div id="loginAlert" role="alert" class="alert alert-soft alert-error mt-4 hidden">
 									<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current"
@@ -109,7 +109,7 @@
 									</label>
 								</fieldset>
 								<div class="mt-4 ">
-									<button id="btnSignup" class="btn btn-block btn-accent py-5">Create Account</button>
+									<button id="btnSignup" class="btn btn-block btn-primary py-5">Create Account</button>
 								</div>
 								<div id="signupAlertSuccess" role="alert"
 									class="alert alert-soft alert-success mt-4 hidden">
