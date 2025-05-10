@@ -7,6 +7,10 @@ class Prospect {
     city = "",
     chatting = false,
     socialMedia = false,
+    stage1=false,
+    stage1Week = "",
+    stage2=false,
+    stage2Week = "",
     info = false,
     infoWeek = "",
     infoResponse = "",
@@ -29,6 +33,10 @@ class Prospect {
     this.city = city;
     this.chatting = chatting;
     this.socialMedia = socialMedia;
+    this.stage1 = stage1;
+    this.stage1Week = stage1Week;
+    this.stage2 = stage2;
+    this.stage2Week = stage2Week;
     this.info = info;
     this.infoWeek = infoWeek;
     this.infoResponse = infoResponse;
@@ -353,6 +361,19 @@ function generateRowNamelistUI(sl, prospect) {
 							<td class="br socialMedia"> <input type="checkbox" class="checkbox" onchange="updateSocialMedia(${
                 prospect.id
               }, this)" ${prospect.socialMedia == true ? "checked" : ""}/></td>
+              <td class="bl stage1"> <input type="checkbox" class="checkbox" onchange="updateStage1(${
+                prospect.id
+              }, this)" ${prospect.stage1 == true ? "checked" : ""}/></td>
+              <td class="br weekStage2"><input type="text" placeholder="week" onchange="updateStage1Week(${
+                prospect.id
+              }, this)" value="${prospect.stage1Week}"/></td>
+              <td class="bl stage2"> <input type="checkbox" class="checkbox" onchange="updateStage2(${
+                prospect.id
+              }, this)" ${prospect.stage2 == true ? "checked" : ""}/></td>
+              <td class="br weekStage1"><input type="text" placeholder="week" onchange="updateStage2Week(${
+                prospect.id
+              }, this)" value="${prospect.stage2Week}"/></td>
+
 							<td class="bl info"> <input type="checkbox" class="checkbox" onchange="updateInfo(${
                 prospect.id
               }, this)" ${prospect.info == true ? "checked" : ""}/></td>
@@ -570,6 +591,42 @@ function updateSocialMedia(id, elem) {
     if (namelist[i].id == id) {
       namelist[i].socialMedia = $(elem).prop("checked");
       updateProspectFB(id, "socialMedia", $(elem).prop("checked"), "bool");
+      break;
+    }
+  }
+}
+function updateStage1(id, elem) {
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
+      namelist[i].socialMedia = $(elem).prop("checked");
+      updateProspectFB(id, "stage1", $(elem).prop("checked"), "bool");
+      break;
+    }
+  }
+}
+function updateStage1Week(id, elem) {
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
+      namelist[i].infoWeek = $(elem).val();
+      updateProspectFB(id, "stage1Week", $(elem).val());
+      break;
+    }
+  }
+}
+function updateStage2(id, elem) {
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
+      namelist[i].socialMedia = $(elem).prop("checked");
+      updateProspectFB(id, "stage2", $(elem).prop("checked"), "bool");
+      break;
+    }
+  }
+}
+function updateStage2Week(id, elem) {
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
+      namelist[i].infoWeek = $(elem).val();
+      updateProspectFB(id, "stage2Week", $(elem).val());
       break;
     }
   }

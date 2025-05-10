@@ -19,7 +19,7 @@
 
 	<div class="container-login">
 		<div class="card card-border bg-base-100 w-230 mx-auto shadow-xl" data-theme="light" >
-			<div class="card-body pb-30 pt-15">
+			<div class="card-body pb-20 pt-15">
 				<div class="flex w-full items-center justify-center">
 					<div class="flex-none">
 						<i data-lucide="zap" class=""></i>
@@ -33,7 +33,7 @@
 						<img class="h-100" src="images/lion1.png" alt="IMG">
 					</div>
 					<div class="flex-1">
-						<div class="tabs tabs-lift tabs-bottom w-full h-105 ">
+						<div class="tabs tabs-lift tabs-bottom w-full ">
 							<input type="radio" name="my_tabs_5" class="tab" aria-label="Login"  checked="checked"/>
 							<div class="tab-content bg-base-100 border-base-300 p-6">
 								<fieldset class="fieldset mt-2">
@@ -41,25 +41,25 @@
 									<label class="input">
 										<i class="" data-lucide="mail"></i>
 										<input id="loginEmail" class="input" type="email" placeholder="enter email"
-											onkeyup="checkValidEmailLogin(this)" />
+											onkeyup="checkValidEmailLogin(this)"/>
 										<span id="loginEmailValidator">
 
 										</span>
 									</label>
 								</fieldset>
-								<fieldset class="fieldset mt-4">
+								<fieldset class="fieldset">
 									<legend class="fieldset-legend">Password</legend>
 									<label class="input">
 										<i data-lucide="lock"></i>
 										<input id="loginPass" class="input" type="password" placeholder="enter password"
-											onkeyup="checkValidPasswordLogin(this)" />
+											onkeyup="checkValidPasswordLogin(this)" onchange="login()"/>
 										<span id="loginPassValidator">
 
 										</span>
 									</label>
 								</fieldset>
 
-								<div class="mt-14 ">
+								<div class="mt-4 ">
 									<button id="btnLogin" class="btn btn-block btn-primary py-5">Login</button>
 								</div>
 								<div id="loginAlert" role="alert" class="alert alert-soft alert-error mt-4 hidden">
@@ -80,7 +80,7 @@
 									<label class="input">
 										<i data-lucide="user"></i>
 										<input id="signupName" class="input" type="text" required
-											placeholder="enter name" onkeyup="checkValidNameSignup(this)"/>
+											placeholder="enter name" onkeyup="checkValidNameSignup(this)" />
 										<span id="signupEmailValidator">
 
 										</span>
@@ -102,7 +102,7 @@
 									<label class="input">
 										<i data-lucide="phone"></i>
 										<input id="signupPhone" class="input" type="text" required
-											placeholder="enter phone" onkeyup="checkValidPhoneSignup(this)" maxlength="10"/>
+											placeholder="enter phone" onkeyup="checkValidPhoneSignup(this)" maxlength="10" onchange="signup()"/>
 										<span id="signupPhoneValidator">
 
 										</span>

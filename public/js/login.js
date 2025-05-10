@@ -54,13 +54,17 @@ function checkValidPasswordLogin(elem) {
 }
 
 $("#btnLogin").click(function () {
+  login();
+});
+
+function login() {
   if (isValidEmailLogin == true && isValidPassLogin == true) {
     const email = loginEmail.value;
     const pass = loginPass.value;
-    $(this).html(
+    $("#btnLogin").html(
       '<span class="loading loading-spinner text-accent loading-md"></span>'
     );
-    $(this).attr("disabled", true);
+    $("#btnLogin").attr("disabled", true);
     LoginFB(email, pass);
   } else {
     loginAlertContent.innerHTML = "Invalid credentials!";
@@ -72,7 +76,7 @@ $("#btnLogin").click(function () {
         $(this).addClass("hidden");
       });
   }
-});
+}
 
 //============================
 // Signup validation
@@ -146,6 +150,10 @@ function checkValidPhoneSignup(elem) {
 }
 
 $("#btnSignup").click(function () {
+  signup();
+});
+
+function signup() {
   if (
     isValidNameSignup == true &&
     isValidEmailSignup == true &&
@@ -154,10 +162,10 @@ $("#btnSignup").click(function () {
     const name = signupName.value;
     const email = singupEmail.value;
     const phone = signupPhone.value;
-    $(this).html(
+    $("#btnSignup").html(
       '<span class="loading loading-spinner text-accent loading-md"></span>'
     );
-    $(this).attr("disabled", true);
+    $("#btnSignup").attr("disabled", true);
     SignupFB(name, email, phone);
   } else {
     signupAlertErrorContent.innerHTML = "Invalid details!";
@@ -169,7 +177,7 @@ $("#btnSignup").click(function () {
         $(this).addClass("hidden");
       });
   }
-});
+}
 
 //============================
 // AJAX methods
@@ -214,7 +222,10 @@ function SignupFB(name, email, phone) {
       singupEmail.value = "";
       signupPhone.value = "";
 
-      signupAlertSuccessContent.innerHTML = "Successfully signed up <strong>" + name + "</strong>. Please login to continue.";
+      signupAlertSuccessContent.innerHTML =
+        "Successfully signed up <strong>" +
+        name +
+        "</strong>. Please login to continue.";
       $("#signupAlertSuccess")
         .removeClass("hidden")
         .fadeIn(500)

@@ -60,6 +60,8 @@ tbody input[type="text"]:focus {
   border: none !important;
 }
 
+.weekStage1 input[type="text"],
+.weekStage2 input[type="text"],
 .weekInfo input[type="text"],
 .weekReinfo input[type="text"],
 .weekInvite input[type="text"],
