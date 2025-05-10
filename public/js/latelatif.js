@@ -7,6 +7,10 @@ class Prospect {
     city = "",
     chatting = false,
     socialMedia = false,
+    stage1=false,
+    stage1Week = "",
+    stage2=false,
+    stage2Week = "",
     info = false,
     infoWeek = "",
     infoResponse = "",
@@ -29,6 +33,10 @@ class Prospect {
     this.city = city;
     this.chatting = chatting;
     this.socialMedia = socialMedia;
+    this.stage1 = stage1;
+    this.stage1Week = stage1Week;
+    this.stage2 = stage2;
+    this.stage2Week = stage2Week;
     this.info = info;
     this.infoWeek = infoWeek;
     this.infoResponse = infoResponse;
@@ -47,6 +55,8 @@ class Prospect {
 }
 
 var namelist = [];
+var searchedNL = [];
+var isFilter = false;
 
 function generateSortWeekDropDownUI() {
   var weekDropDownUI = "";
@@ -57,21 +67,105 @@ function generateSortWeekDropDownUI() {
   $("#weekAddPerson").children("select").append(weekDropDownUI);
 }
 
+function clearSelectionUI() {
+  $("#NLTable")
+    .children("thead")
+    .children("tr")
+    .each(function () {
+      $(this)
+        .children("td")
+        .each(function () {
+          $(this).removeClass("searchedField");
+        });
+      $(this)
+        .children("th")
+        .each(function () {
+          $(this).removeClass("searchedField");
+        });
+    });
+}
+
+function enableSelectionUI(value) {
+  if (value == "Name") {
+    $(".name").addClass("searchedField");
+  }
+  if (value == "Week Added") {
+    $(".weekAdded").addClass("searchedField");
+  }
+  if (value == "City") {
+    $(".city").addClass("searchedField");
+  }
+  if (value == "Zone") {
+    $(".zone").addClass("searchedField");
+  }
+  if (value == "Chatting") {
+    $(".chatting").addClass("searchedField");
+  }
+  if (value == "Social Media") {
+    $(".socialMedia").addClass("searchedField");
+  }
+   if (value == "Stage 1") {
+    $(".stage1").addClass("searchedField");
+  }
+   if (value == "Stage 2") {
+    $(".stage2").addClass("searchedField");
+  }
+  if (value == "Info") {
+    $(".info").addClass("searchedField");
+  }
+  if (value == "Reinfo") {
+    $(".reinfo").addClass("searchedField");
+  }
+  if (value == "Meetup") {
+    $(".meetup").addClass("searchedField");
+  }
+  if (value == "Invi") {
+    $(".invi").addClass("searchedField");
+  }
+  if (value == "Plan") {
+    $(".plan").addClass("searchedField");
+  }
+}
+
 function filterValueChanged(elem) {
+  generateNL(namelist);
+  clearSelectionUI();
+  enableSelectionUI($(elem).val());
+
   $(".option").each(function () {
     $(this).addClass("hidden");
   });
+
+  if ($(elem).val() != "") {
+    isFilter = true;
+    $("#cancelFilterBtn").removeClass("hidden");
+  } else {
+    isFilter = false;
+    $("#cancelFilterBtn").addClass("hidden");
+  }
+
   if ($(elem).val() == "Name") {
     $("#sortName").parent().removeClass("hidden");
   } else if ($(elem).val() == "Week Added") {
+    $("#sortWeek option").prop("selected", function () {
+      // return defaultSelected property of the option
+      return this.defaultSelected;
+    });
     $("#sortWeek").parent().removeClass("hidden");
   } else if ($(elem).val() == "Zone") {
+    $("#sortZone option").prop("selected", function () {
+      // return defaultSelected property of the option
+      return this.defaultSelected;
+    });
     $("#sortZone").parent().removeClass("hidden");
   } else if ($(elem).val() == "City") {
     $("#sortCity").parent().removeClass("hidden");
   } else if (
+    
     $(elem).val() == "Chatting" ||
     $(elem).val() == "Social Media" ||
+    $(elem).val() == "Stage 1" ||
+    $(elem).val() == "Stage 2" ||
     $(elem).val() == "Info" ||
     $(elem).val() == "Reinfo" ||
     $(elem).val() == "Meetup" ||
@@ -86,19 +180,194 @@ function filterValueChanged(elem) {
   }
 }
 
+$("#cancelFilterBtn").click(function () {
+  isFilter = false;
+  clearSelectionUI();
+  $(".option").each(function () {
+    $(this).addClass("hidden");
+  });
+
+  generateNL(namelist);
+
+  $("#fliterDropDown").val("");
+  $(this).addClass("hidden");
+});
+
+//Search methods
+
+function searchByName(elem) {
+  pageNumber.innerHTML = 1;
+  const searchStr = $(elem).val();
+  searchedNL = [];
+
+  if (searchStr != "") {
+    for (let i = 0; i < namelist.length; i++) {
+      if (namelist[i].name.toLowerCase().match(searchStr.toLowerCase())) {
+        searchedNL.push(namelist[i]);
+      }
+    }
+  } else {
+    searchedNL = namelist;
+  }
+  generateNL(searchedNL);
+}
+
+function searchByWeekAdded(elem) {
+  pageNumber.innerHTML = 1;
+  const weekAdded = $(elem).val();
+  searchedNL = [];
+  if (weekAdded != "") {
+    for (let i = 0; i < namelist.length; i++) {
+      if (namelist[i].week == weekAdded) {
+        searchedNL.push(namelist[i]);
+      }
+    }
+  } else {
+    searchedNL = namelist;
+  }
+
+  generateNL(searchedNL);
+}
+
+function searchByZone(elem) {
+  pageNumber.innerHTML = 1;
+  const zone = $(elem).val();
+  searchedNL = [];
+  if (zone != "") {
+    for (let i = 0; i < namelist.length; i++) {
+      if (namelist[i].zone == zone) {
+        searchedNL.push(namelist[i]);
+      }
+    }
+  } else {
+    searchedNL = namelist;
+  }
+  generateNL(searchedNL);
+}
+
+function searchByCity(elem) {
+  pageNumber.innerHTML = 1;
+  const searchStr = $(elem).val();
+  searchedNL = [];
+
+  if (searchStr != "") {
+    for (let i = 0; i < namelist.length; i++) {
+      if (namelist[i].city.toLowerCase().match(searchStr.toLowerCase())) {
+        searchedNL.push(namelist[i]);
+      }
+    }
+  } else {
+    searchedNL = namelist;
+  }
+  generateNL(searchedNL);
+}
+
+//helper
+function getTF(donePendingStr) {
+  pageNumber.innerHTML = 1;
+  if (donePendingStr == "Done") {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function searchByDonePending(elem) {
+  pageNumber.innerHTML = 1;
+  const donePending = $(elem).val();
+  searchedNL = [];
+
+  if (donePending != "") {
+    if ($("#fliterDropDown").val() == "Chatting") {
+      for (let i = 0; i < namelist.length; i++) {
+        if (namelist[i].chatting == getTF(donePending)) {
+          searchedNL.push(namelist[i]);
+        }
+      }
+    }
+    if ($("#fliterDropDown").val() == "Social Media") {
+      for (let i = 0; i < namelist.length; i++) {
+        if (namelist[i].socialMedia == getTF(donePending)) {
+          searchedNL.push(namelist[i]);
+        }
+      }
+    }
+    if ($("#fliterDropDown").val() == "Stage 1") {
+      for (let i = 0; i < namelist.length; i++) {
+        if (namelist[i].stage1 == getTF(donePending)) {
+          searchedNL.push(namelist[i]);
+        }
+      }
+    }
+    if ($("#fliterDropDown").val() == "Stage 2") {
+      for (let i = 0; i < namelist.length; i++) {
+        if (namelist[i].stage2 == getTF(donePending)) {
+          searchedNL.push(namelist[i]);
+        }
+      }
+    }
+    if ($("#fliterDropDown").val() == "Info") {
+      for (let i = 0; i < namelist.length; i++) {
+        if (namelist[i].info == getTF(donePending)) {
+          searchedNL.push(namelist[i]);
+        }
+      }
+    }
+    if ($("#fliterDropDown").val() == "Reinfo") {
+      for (let i = 0; i < namelist.length; i++) {
+        if (namelist[i].reinfo == getTF(donePending)) {
+          searchedNL.push(namelist[i]);
+        }
+      }
+    }
+    if ($("#fliterDropDown").val() == "Info") {
+      for (let i = 0; i < namelist.length; i++) {
+        if (namelist[i].info == getTF(donePending)) {
+          searchedNL.push(namelist[i]);
+        }
+      }
+    }
+    if ($("#fliterDropDown").val() == "Meetup") {
+      for (let i = 0; i < namelist.length; i++) {
+        if (namelist[i].meetup == getTF(donePending)) {
+          searchedNL.push(namelist[i]);
+        }
+      }
+    }
+    if ($("#fliterDropDown").val() == "Invi") {
+      for (let i = 0; i < namelist.length; i++) {
+        if (namelist[i].invi == getTF(donePending)) {
+          searchedNL.push(namelist[i]);
+        }
+      }
+    }
+    if ($("#fliterDropDown").val() == "Plan") {
+      for (let i = 0; i < namelist.length; i++) {
+        if (namelist[i].plan == getTF(donePending)) {
+          searchedNL.push(namelist[i]);
+        }
+      }
+    }
+  } else {
+    searchedNL = namelist;
+  }
+
+  generateNL(searchedNL);
+}
+
 function generateRowNamelistUI(sl, prospect) {
   //
   $("#namelistTable").append(`
         						<tr>
 							<td class="sl">${sl}</td>
-							<th class="name_col z-[2]"><input type="text" value="${
+							<th class="name_col z-[2] name"><input type="text" value="${
                 prospect.name
               }" onchange="updateName(${prospect.id}, this)"/></th>
 							<td class="weekAdded"><input type="text" placeholder="week" onchange="updateWeekAdded(${
                 prospect.id
               }, this)" value="${prospect.week}" /></td>
-							<td>
-								<select class="zone" onchange="updateZone(${prospect.id}, this)">
+							<td class="zone">
+								<select onchange="updateZone(${prospect.id}, this)">
 									<option ${prospect.zone == "Office" ? "selected" : ""}>Office</option>
 									<option ${prospect.zone == "PG" ? "selected" : ""}>PG</option>
 									<option ${prospect.zone == "School" ? "selected" : ""}>School</option>
@@ -109,19 +378,32 @@ function generateRowNamelistUI(sl, prospect) {
 							<td class="city"><input type="text" placeholder="city" onchange="updateCity(${
                 prospect.id
               }, this)" value="${prospect.city}" /></td>
-							<td class="bl"> <input type="checkbox" class="checkbox" onchange="updateChatting(${
+							<td class="chatting bl"> <input type="checkbox" class="checkbox" onchange="updateChatting(${
                 prospect.id
               }, this)" ${prospect.chatting == true ? "checked" : ""}/></td>
-							<td class="br"> <input type="checkbox" class="checkbox" onchange="updateSocialMedia(${
+							<td class="br socialMedia"> <input type="checkbox" class="checkbox" onchange="updateSocialMedia(${
                 prospect.id
               }, this)" ${prospect.socialMedia == true ? "checked" : ""}/></td>
-							<td class="bl"> <input type="checkbox" class="checkbox" onchange="updateInfo(${
+              <td class="bl stage1"> <input type="checkbox" class="checkbox" onchange="updateStage1(${
+                prospect.id
+              }, this)" ${prospect.stage1 == true ? "checked" : ""}/></td>
+              <td class="br weekStage1 stage1"><input type="text" placeholder="week" onchange="updateStage1Week(${
+                prospect.id
+              }, this)" value="${prospect.stage1Week}"/></td>
+              <td class="bl stage2"> <input type="checkbox" class="checkbox" onchange="updateStage2(${
+                prospect.id
+              }, this)" ${prospect.stage2 == true ? "checked" : ""}/></td>
+              <td class="br weekStage2 stage2"><input type="text" placeholder="week" onchange="updateStage2Week(${
+                prospect.id
+              }, this)" value="${prospect.stage2Week}"/></td>
+
+							<td class="bl info"> <input type="checkbox" class="checkbox" onchange="updateInfo(${
                 prospect.id
               }, this)" ${prospect.info == true ? "checked" : ""}/></td>
-							<td class="weekInfo"><input type="text" placeholder="week" onchange="updateInfoWeek(${
+							<td class="weekInfo info"><input type="text" placeholder="week" onchange="updateInfoWeek(${
                 prospect.id
               }, this)" value="${prospect.infoWeek}"/></td>
-							<td class="br">
+							<td class="br info">
 								<select class="response responseInfo" onchange="updateInfoResponse(${
                   prospect.id
                 }, this)">
@@ -131,13 +413,13 @@ function generateRowNamelistUI(sl, prospect) {
 									<option ${prospect.infoResponse == "C" ? "selected" : ""}>C</option>
 								</select>
 							</td>
-							<td class="bl"> <input type="checkbox" class="checkbox" onchange="updateReInfo(${
+							<td class="bl reinfo"> <input type="checkbox" class="checkbox" onchange="updateReInfo(${
                 prospect.id
               }, this)" ${prospect.reinfo == true ? "checked" : ""}/></td>
-							<td class="weekReinfo"><input type="text" placeholder="week" onchange="updateReInfoWeek(${
+							<td class="weekReinfo reinfo"><input type="text" placeholder="week" onchange="updateReInfoWeek(${
                 prospect.id
               }, this)" value="${prospect.reinfoWeek}"/></td>
-							<td class="br">
+							<td class="br reinfo">
 								<select class="response responseReinfo" onchange="updateReInfoResponse(${
                   prospect.id
                 }, this)">
@@ -147,16 +429,16 @@ function generateRowNamelistUI(sl, prospect) {
 									<option ${prospect.reinfoResponse == "C" ? "selected" : ""}>C</option>
 								</select>
 							</td>
-							<td> <input type="checkbox" class="checkbox" onchange="updateMeetup(${
+							<td class="meetup"> <input type="checkbox" class="checkbox" onchange="updateMeetup(${
                 prospect.id
               }, this)" ${prospect.meetup == true ? "checked" : ""}/></td>
-							<td class="bl"> <input type="checkbox" class="checkbox" onchange="updateInvi(${
+							<td class="bl invi"> <input type="checkbox" class="checkbox" onchange="updateInvi(${
                 prospect.id
               }, this)" ${prospect.invi == true ? "checked" : ""}/></td>
-							<td class="weekInvite"><input type="text" placeholder="week" onchange="updateInviWeek(${
+							<td class="weekInvite invi"><input type="text" placeholder="week" onchange="updateInviWeek(${
                 prospect.id
               }, this)" value="${prospect.inviWeek}"/></td>
-							<td class="br">
+							<td class="br invi">
 								<select class="responseInvite" onchange="updateInviResponse(${
                   prospect.id
                 }, this)">
@@ -165,13 +447,13 @@ function generateRowNamelistUI(sl, prospect) {
 									<option ${prospect.inviResponse == "No" ? "selected" : ""}>No</option>
 								</select>
 							</td>
-							<td class="bl"> <input type="checkbox" class="checkbox" onchange="updatePlan(${
+							<td class="bl plan"> <input type="checkbox" class="checkbox" onchange="updatePlan(${
                 prospect.id
               }, this)" ${prospect.plan == true ? "checked" : ""}/></td>
-							<td class="weekPlan"><input type="text" placeholder="week" onchange="updatePlanWeek(${
+							<td class="weekPlan plan"><input type="text" placeholder="week" onchange="updatePlanWeek(${
                 prospect.id
               }, this)" value="${prospect.planWeek}"/></td>
-							<td class="br">
+							<td class="br plan">
 								<select class="planStatus" onchange="updatePlanStatus(${prospect.id}, this)">
 									<option></option>
 									<option ${prospect.planStatus == "CIP" ? "selected" : ""}>CIP</option>
@@ -190,16 +472,17 @@ function generateRowNamelistUI(sl, prospect) {
               }, this)" value="${prospect.remarks}"/></td>
 							<th>
 								<div class="flex">
-									<div class=""><button class="btn btn-soft btn-sm btn-accent p-0 h-7 w-7" onclick="transferProspectToNamelist(${
+                <div class=""><button class="btn btn-soft btn-sm btn-accent p-0 h-7 w-7" onclick="transferProspectToNamelist(${
                     prospect.id
                   })"><i
-												class="w-5 h-5" data-lucide="book-user"></i></button>
-									</div>
+												class="w-5 h-5" data-lucide="book-user"></i></button></div>
 									<div class="ml-1"><button class="btn btn-soft btn-sm btn-info p-0 h-7 w-7" onclick="transferProspectToKIV(${
                     prospect.id
                   })"><i
-												class="w-5 h-5" data-lucide="eye"></i></button></div>
-									<div class="ml-1"><button class="btn btn-soft btn-sm btn-error p-0 h-7 w-7" onclick="removeProspect(${
+												class="w-5 h-5" data-lucide="eye"></i></button>
+									</div>
+									
+									<div class="ml-1"><button class="btn btn-soft btn-sm btn-error p-0 h-7 w-7" onclick="openDeleteModal(${
                     prospect.id
                   })"><i
 												class="w-5 h-5" data-lucide="trash-2"></i></button></div>
@@ -237,14 +520,23 @@ function goBack() {
   if (parseInt(pageNumber.innerHTML) > 1) {
     pageNumber.innerHTML = parseInt(pageNumber.innerHTML) - 1;
   }
-  generateNL(namelist);
+  if(isFilter){
+    generateNL(searchedNL);
+  }else{
+    generateNL(namelist);
+  }
 }
 
 function goForward() {
   if (parseInt(pageNumber.innerHTML) < namelist.length / 10) {
     pageNumber.innerHTML = parseInt(pageNumber.innerHTML) + 1;
   }
-  generateNL(namelist);
+  if(isFilter){
+    generateNL(searchedNL);
+  }else{
+    generateNL(namelist);
+  }
+ 
 }
 
 //Addition
@@ -269,6 +561,8 @@ function addPerson() {
 
   generateNL(namelist);
 }
+
+
 
 //updation
 function updateName(id, elem) {
@@ -321,6 +615,42 @@ function updateSocialMedia(id, elem) {
     if (namelist[i].id == id) {
       namelist[i].socialMedia = $(elem).prop("checked");
       updateProspectFB(id, "socialMedia", $(elem).prop("checked"), "bool");
+      break;
+    }
+  }
+}
+function updateStage1(id, elem) {
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
+      namelist[i].socialMedia = $(elem).prop("checked");
+      updateProspectFB(id, "stage1", $(elem).prop("checked"), "bool");
+      break;
+    }
+  }
+}
+function updateStage1Week(id, elem) {
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
+      namelist[i].infoWeek = $(elem).val();
+      updateProspectFB(id, "stage1Week", $(elem).val());
+      break;
+    }
+  }
+}
+function updateStage2(id, elem) {
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
+      namelist[i].socialMedia = $(elem).prop("checked");
+      updateProspectFB(id, "stage2", $(elem).prop("checked"), "bool");
+      break;
+    }
+  }
+}
+function updateStage2Week(id, elem) {
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
+      namelist[i].infoWeek = $(elem).val();
+      updateProspectFB(id, "stage2Week", $(elem).val());
       break;
     }
   }
@@ -464,19 +794,6 @@ function removeProspect(id) {
   removeProspectFB(id, name);
   generateNL(namelist);
 }
-function transferProspectToNamelist(id) {
-  const name = getName(id);
-  for (let i = 0; i < namelist.length; i++) {
-    if (namelist[i].id == id) {
-      namelist.splice(i, 1);
-      break;
-    }
-  }
-  transferProspectToNamelistFB(id, name)
-  generateNL(namelist);
-  //Add to KIV list
-}
-
 function transferProspectToKIV(id) {
   const name = getName(id);
   for (let i = 0; i < namelist.length; i++) {
@@ -487,8 +804,33 @@ function transferProspectToKIV(id) {
   }
   transferProspectToKIVFB(id, name);
   generateNL(namelist);
+  //Add to KIV list
+}
+
+function transferProspectToNamelist(id) {
+  const name = getName(id);
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
+      namelist.splice(i, 1);
+      break;
+    }
+  }
+  transferProspectToNamelistFB(id, name);
+  generateNL(namelist);
   //Add to LL list
 }
+
+//Modals
+
+function openDeleteModal(id){
+  deleteModalProsName.innerHTML = getName(id);
+  deleteModalProsID.innerHTML = id;
+  deleteProspectModal.showModal();
+}
+
+$("#deleteProspectBtn").click(function(){
+  removeProspect(deleteModalProsID.innerHTML);
+});
 
 //ajax methods
 function addProspectFB(prospect) {
@@ -502,8 +844,14 @@ function addProspectFB(prospect) {
   xhttp.send(JSON.stringify(data));
 }
 
-function showAlert(content, type="success"){
-  $(".alert").removeClass("alert-error").removeClass("alert-info").removeClass("alert-primary").removeClass("alert-success").addClass("alert-" + type).removeClass("hidden");
+function showAlert(content, type = "success") {
+  $(".alert")
+    .removeClass("alert-error")
+    .removeClass("alert-info")
+    .removeClass("alert-primary")
+    .removeClass("alert-success")
+    .addClass("alert-" + type)
+    .removeClass("hidden");
   alertContent.innerHTML = content;
 }
 
@@ -515,7 +863,9 @@ function getNLData() {
     namelist = response;
     generateNL(namelist);
     showAlert("Namelist loaded");
-   
+    $("#fliterDropDown").attr("disabled", false);
+    $(".loading").addClass("hidden");
+    $("#addProspectModalBtn").attr("disabled", false);
   };
   xhttp.setRequestHeader("Content-Type", "application/json");
   xhttp.send();
@@ -532,17 +882,6 @@ function removeProspectFB(id, name) {
   xhttp.send(JSON.stringify(data));
 }
 
-function transferProspectToNamelistFB(id, name) {
-  const data = { id: id };
-  const xhttp = new XMLHttpRequest();
-  xhttp.open("POST", "/latelatif/transferToNamelist");
-  xhttp.onload = function () {
-    showAlert(name + " transferred to Working Namelist successfully!", "info");
-  };
-  xhttp.setRequestHeader("Content-Type", "application/json");
-  xhttp.send(JSON.stringify(data));
-}
-
 function transferProspectToKIVFB(id, name) {
   const data = { id: id };
   const xhttp = new XMLHttpRequest();
@@ -554,9 +893,20 @@ function transferProspectToKIVFB(id, name) {
   xhttp.send(JSON.stringify(data));
 }
 
-function getName(id){
-  for(let i=0; i<namelist.length; i++){
-    if(namelist[i].id == id){
+function transferProspectToNamelistFB(id, name) {
+  const data = { id: id };
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("POST", "/latelatif/transferToNamelist");
+  xhttp.onload = function () {
+    showAlert(name + " transferred to LL successfully!", "info");
+  };
+  xhttp.setRequestHeader("Content-Type", "application/json");
+  xhttp.send(JSON.stringify(data));
+}
+
+function getName(id) {
+  for (let i = 0; i < namelist.length; i++) {
+    if (namelist[i].id == id) {
       return namelist[i].name;
     }
   }
@@ -601,6 +951,10 @@ function generateNL(namelist) {
       ),
       namelist.length
     );
+  }
+
+  if(isFilter){
+    enableSelectionUI($("#fliterDropDown").val());
   }
 }
 

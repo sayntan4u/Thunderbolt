@@ -60,6 +60,8 @@ tbody input[type="text"]:focus {
   border: none !important;
 }
 
+.weekStage1 input[type="text"],
+.weekStage2 input[type="text"],
 .weekInfo input[type="text"],
 .weekReinfo input[type="text"],
 .weekInvite input[type="text"],
@@ -109,6 +111,11 @@ tbody select option {
   .bb {
     border-bottom: 1px solid var(--color-accent-content) !important;
   }
+
+  .searchedField{
+    background-color: var(--color-primary-content) !important;
+    color:var(--color-neutral) !important;
+  }
 }
 
 [data-theme="dark"] {
@@ -123,6 +130,11 @@ tbody select option {
   .bb {
     border-bottom: 1px solid var(--color-accent-content) !important;
   }
+
+  .searchedField{
+    background-color: var(--color-neutral) !important;
+    color: var(--color-neutral-content) !important;
+  }
 }
 
 
@@ -130,3 +142,5 @@ tbody select option {
 .select {
   outline: none;
 }
+
+
