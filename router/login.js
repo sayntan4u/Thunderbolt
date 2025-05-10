@@ -19,15 +19,13 @@ router.get("/", function (req, res) {
 });
 
 router.post("/", async function (req, res) {
-  authm.login(req, res);
+  const result = await authm.login(req);
+  res.send(result);
 });
 
-router.get("/createAccount", function (req, res) {
-  res.render("signup");
-});
-
-router.post("/createAccount", function (req, res) {
-  authm.signup(req,res);
+router.post("/createAccount",async function (req, res) {
+  const result = await authm.signup(req);
+  res.send(result);
 });
 
 router.get("/forgot", function (req, res) {
