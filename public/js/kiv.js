@@ -866,7 +866,7 @@ function getNLData() {
     const response = JSON.parse(this.responseText);
     namelist = response;
     generateNL(namelist);
-    showAlert("Namelist loaded");
+    showAlert("KIV List loaded");
     $("#fliterDropDown").attr("disabled", false);
     $(".loading").addClass("hidden");
     $("#addProspectModalBtn").attr("disabled", false);
@@ -891,7 +891,7 @@ function transferProspectToNamelistFB(id, name) {
   const xhttp = new XMLHttpRequest();
   xhttp.open("POST", "/kiv/transferToNamelist");
   xhttp.onload = function () {
-    showAlert(name + " transferred to KIV successfully!", "info");
+    showAlert(name + " transferred to Working List successfully!", "info");
   };
   xhttp.setRequestHeader("Content-Type", "application/json");
   xhttp.send(JSON.stringify(data));
@@ -902,7 +902,7 @@ function transferProspectToLLFB(id, name) {
   const xhttp = new XMLHttpRequest();
   xhttp.open("POST", "/kiv/transferToLL");
   xhttp.onload = function () {
-    showAlert(name + " transferred to LL successfully!", "info");
+    showAlert(name + " transferred to LateLatifs successfully!", "info");
   };
   xhttp.setRequestHeader("Content-Type", "application/json");
   xhttp.send(JSON.stringify(data));
