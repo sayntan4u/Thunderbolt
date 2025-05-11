@@ -1,5 +1,9 @@
 var selectedAvatarId = 17;
 
+if(localStorage.getItem("darkMode") == null){
+  localStorage.setItem("darkMode", "false");
+}
+
 if (localStorage.getItem("darkMode") === "true") {
   document.documentElement.setAttribute("data-theme", "dark");
   $(".header-menu").attr("data-theme", "light");
