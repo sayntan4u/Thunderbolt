@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const nlm = require("../lib/nlmanager");
+const userm = require("../lib/usermanager");
+
 
 const requireAuth = (req, res, next) => {
   if (req.session.userId) {

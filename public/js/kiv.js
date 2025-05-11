@@ -477,7 +477,7 @@ function generateRowNamelistUI(sl, prospect) {
                   })"><i
 												class="w-5 h-5" data-lucide="book-user"></i></button>
 									</div>
-									<div class="ml-1"><button class="btn btn-soft btn-sm btn-primary p-0 h-7 w-7" onclick="transferProspectToLL(${
+									<div class="ml-1"><button class="btn btn-soft btn-sm btn-secondary p-0 h-7 w-7" onclick="transferProspectToLL(${
                     prospect.id
                   })"><i
 												class="w-5 h-5" data-lucide="snail"></i></button></div>
