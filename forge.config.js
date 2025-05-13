@@ -3,7 +3,7 @@ const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 
 module.exports = {
   packagerConfig: {
-    icon: './icon/icon.ico',
+    icon: './icon/icon',
     asar: true,
   },
   rebuildConfig: {},
@@ -17,6 +17,9 @@ module.exports = {
     {
       name: '@electron-forge/maker-zip',
       platforms: ['darwin'],
+       config: {
+        icon: './icon/icon.icns'
+      },
     },
     {
       name: '@electron-forge/maker-deb',
