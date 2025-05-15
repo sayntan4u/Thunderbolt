@@ -622,7 +622,7 @@ function updateSocialMedia(id, elem) {
 function updateStage1(id, elem) {
   for (let i = 0; i < namelist.length; i++) {
     if (namelist[i].id == id) {
-      namelist[i].socialMedia = $(elem).prop("checked");
+      namelist[i].stage1 = $(elem).prop("checked");
       updateProspectFB(id, "stage1", $(elem).prop("checked"), "bool");
       break;
     }
@@ -631,7 +631,7 @@ function updateStage1(id, elem) {
 function updateStage1Week(id, elem) {
   for (let i = 0; i < namelist.length; i++) {
     if (namelist[i].id == id) {
-      namelist[i].infoWeek = $(elem).val();
+      namelist[i].stage1Week = $(elem).val();
       updateProspectFB(id, "stage1Week", $(elem).val());
       break;
     }
@@ -640,7 +640,7 @@ function updateStage1Week(id, elem) {
 function updateStage2(id, elem) {
   for (let i = 0; i < namelist.length; i++) {
     if (namelist[i].id == id) {
-      namelist[i].socialMedia = $(elem).prop("checked");
+      namelist[i].stage2 = $(elem).prop("checked");
       updateProspectFB(id, "stage2", $(elem).prop("checked"), "bool");
       break;
     }
@@ -649,7 +649,7 @@ function updateStage2(id, elem) {
 function updateStage2Week(id, elem) {
   for (let i = 0; i < namelist.length; i++) {
     if (namelist[i].id == id) {
-      namelist[i].infoWeek = $(elem).val();
+      namelist[i].stage2Week = $(elem).val();
       updateProspectFB(id, "stage2Week", $(elem).val());
       break;
     }
