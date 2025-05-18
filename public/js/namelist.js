@@ -320,13 +320,6 @@ function searchByDonePending(elem) {
         }
       }
     }
-    if ($("#fliterDropDown").val() == "Info") {
-      for (let i = 0; i < namelist.length; i++) {
-        if (namelist[i].info == getTF(donePending)) {
-          searchedNL.push(namelist[i]);
-        }
-      }
-    }
     if ($("#fliterDropDown").val() == "Meetup") {
       for (let i = 0; i < namelist.length; i++) {
         if (namelist[i].meetup == getTF(donePending)) {
