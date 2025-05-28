@@ -287,6 +287,7 @@ $("#cancelFilterBtn").click(function () {
   isFilter = false;
   isFilter2 = false;
   clearSelectionUI();
+  clearSelectionUI2();
   $(".option").each(function () {
     $(this).addClass("hidden");
   });
