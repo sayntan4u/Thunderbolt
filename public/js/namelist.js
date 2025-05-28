@@ -7,9 +7,9 @@ class Prospect {
     city = "",
     chatting = false,
     socialMedia = false,
-    stage1=false,
+    stage1 = false,
     stage1Week = "",
-    stage2=false,
+    stage2 = false,
     stage2Week = "",
     info = false,
     infoWeek = "",
@@ -56,7 +56,9 @@ class Prospect {
 
 var namelist = [];
 var searchedNL = [];
+var searchedNL2 = [];
 var isFilter = false;
+var isFilter2 = false;
 
 function generateSortWeekDropDownUI() {
   var weekDropDownUI = "";
@@ -85,6 +87,24 @@ function clearSelectionUI() {
     });
 }
 
+function clearSelectionUI2() {
+  $("#NLTable")
+    .children("thead")
+    .children("tr")
+    .each(function () {
+      $(this)
+        .children("td")
+        .each(function () {
+          $(this).removeClass("searchedField2");
+        });
+      $(this)
+        .children("th")
+        .each(function () {
+          $(this).removeClass("searchedField2");
+        });
+    });
+}
+
 function enableSelectionUI(value) {
   if (value == "Name") {
     $(".name").addClass("searchedField");
@@ -104,10 +124,10 @@ function enableSelectionUI(value) {
   if (value == "Social Media") {
     $(".socialMedia").addClass("searchedField");
   }
-   if (value == "Stage 1") {
+  if (value == "Stage 1") {
     $(".stage1").addClass("searchedField");
   }
-   if (value == "Stage 2") {
+  if (value == "Stage 2") {
     $(".stage2").addClass("searchedField");
   }
   if (value == "Info") {
@@ -127,6 +147,48 @@ function enableSelectionUI(value) {
   }
 }
 
+function enableSelectionUI2(value) {
+  if (value == "Name") {
+    $(".name").addClass("searchedField2");
+  }
+  if (value == "Week Added") {
+    $(".weekAdded").addClass("searchedField2");
+  }
+  if (value == "City") {
+    $(".city").addClass("searchedField2");
+  }
+  if (value == "Zone") {
+    $(".zone").addClass("searchedField2");
+  }
+  if (value == "Chatting") {
+    $(".chatting").addClass("searchedField2");
+  }
+  if (value == "Social Media") {
+    $(".socialMedia").addClass("searchedField2");
+  }
+  if (value == "Stage 1") {
+    $(".stage1").addClass("searchedField2");
+  }
+  if (value == "Stage 2") {
+    $(".stage2").addClass("searchedField2");
+  }
+  if (value == "Info") {
+    $(".info").addClass("searchedField2");
+  }
+  if (value == "Reinfo") {
+    $(".reinfo").addClass("searchedField2");
+  }
+  if (value == "Meetup") {
+    $(".meetup").addClass("searchedField2");
+  }
+  if (value == "Invi") {
+    $(".invi").addClass("searchedField2");
+  }
+  if (value == "Plan") {
+    $(".plan").addClass("searchedField2");
+  }
+}
+
 function filterValueChanged(elem) {
   generateNL(namelist);
   clearSelectionUI();
@@ -135,6 +197,15 @@ function filterValueChanged(elem) {
   $(".option").each(function () {
     $(this).addClass("hidden");
   });
+  $(".option2").each(function () {
+    $(this).addClass("hidden");
+  });
+
+  $("#fliterDropDown2").val("");
+
+  $("#addFilterBtn").html("<i class='size-4' data-lucide='list-filter-plus'></i>");
+  $("#addFilterBtn").attr("disabled", false);
+  loadIcons();
 
   if ($(elem).val() != "") {
     isFilter = true;
@@ -161,7 +232,7 @@ function filterValueChanged(elem) {
   } else if ($(elem).val() == "City") {
     $("#sortCity").parent().removeClass("hidden");
   } else if (
-    
+
     $(elem).val() == "Chatting" ||
     $(elem).val() == "Social Media" ||
     $(elem).val() == "Stage 1" ||
@@ -178,12 +249,48 @@ function filterValueChanged(elem) {
     });
     $("#sortDonePending").parent().removeClass("hidden");
   }
+  $("#addFilterBtn").addClass("hidden");
+}
+
+function filterValueChanged2(elem) {
+  // generateNL(searchedNL);
+  clearSelectionUI2();
+  enableSelectionUI2($(elem).val());
+
+  if ($(elem).val() != "") {
+    isFilter2 = true;
+  } else {
+    isFilter2 = false;
+    // $("#cancelFilterBtn").addClass("hidden");
+    // $("#addFilterBtn").removeClass("hidden");
+  }
+
+  if (
+    $(elem).val() == "Social Media" ||
+    $(elem).val() == "Stage 1" ||
+    $(elem).val() == "Stage 2" ||
+    $(elem).val() == "Info" ||
+    $(elem).val() == "Reinfo" ||
+    $(elem).val() == "Meetup" ||
+    $(elem).val() == "Invi" ||
+    $(elem).val() == "Plan"
+  ) {
+    $("#sortDonePending2 option").prop("selected", function () {
+      // return defaultSelected property of the option
+      return this.defaultSelected;
+    });
+
+  }
 }
 
 $("#cancelFilterBtn").click(function () {
   isFilter = false;
+  isFilter2 = false;
   clearSelectionUI();
   $(".option").each(function () {
+    $(this).addClass("hidden");
+  });
+  $(".option2").each(function () {
     $(this).addClass("hidden");
   });
 
@@ -191,6 +298,45 @@ $("#cancelFilterBtn").click(function () {
 
   $("#fliterDropDown").val("");
   $(this).addClass("hidden");
+  $("#addFilterBtn").addClass("hidden");
+
+  $("#fliterDropDown2").val("");
+
+  $("#addFilterBtn").html("<i class='size-4' data-lucide='list-filter-plus'></i>");
+  $("#addFilterBtn").attr("disabled", false);
+  loadIcons();
+});
+
+$("#addFilterBtn").click(function () {
+  $(this).html("<i class='size-4' data-lucide='ampersand'></i>");
+  $(this).attr("disabled", true);
+
+  $(".option2").each(function () {
+    $(this).removeClass("hidden");
+  });
+  loadIcons();
+});
+
+$("#cancelFilterBtn2").click(function () {
+  isFilter2 = false;
+  clearSelectionUI2();
+  $(".option2").each(function () {
+    $(this).addClass("hidden");
+  });
+
+  if (searchedNL.length > 0) {
+    generateNL(searchedNL);
+  }
+  else {
+    generateNL(namelist);
+  }
+
+  $("#fliterDropDown2").val("");
+
+  $("#addFilterBtn").html("<i class='size-4' data-lucide='list-filter-plus'></i>");
+  $("#addFilterBtn").attr("disabled", false);
+  loadIcons();
+
 });
 
 //Search methods
@@ -278,6 +424,7 @@ function searchByDonePending(elem) {
   searchedNL = [];
 
   if (donePending != "") {
+    $("#addFilterBtn").removeClass("hidden");
     if ($("#fliterDropDown").val() == "Chatting") {
       for (let i = 0; i < namelist.length; i++) {
         if (namelist[i].chatting == getTF(donePending)) {
@@ -348,17 +495,88 @@ function searchByDonePending(elem) {
   generateNL(searchedNL);
 }
 
+function searchByDonePending2(elem) {
+  // console.log(searchedNL);
+  pageNumber.innerHTML = 1;
+  const donePending = $(elem).val();
+  searchedNL2 = [];
+
+  if (donePending != "") {
+
+    if ($("#fliterDropDown2").val() == "Social Media") {
+      for (let i = 0; i < searchedNL.length; i++) {
+        if (searchedNL[i].socialMedia == getTF(donePending)) {
+          searchedNL2.push(searchedNL[i]);
+        }
+      }
+    }
+    if ($("#fliterDropDown2").val() == "Stage 1") {
+      for (let i = 0; i < searchedNL.length; i++) {
+        if (searchedNL[i].stage1 == getTF(donePending)) {
+          searchedNL2.push(searchedNL[i]);
+        }
+      }
+    }
+    if ($("#fliterDropDown2").val() == "Stage 2") {
+      for (let i = 0; i < searchedNL.length; i++) {
+        if (searchedNL[i].stage2 == getTF(donePending)) {
+          searchedNL2.push(searchedNL[i]);
+        }
+      }
+    }
+    if ($("#fliterDropDown2").val() == "Info") {
+      for (let i = 0; i < searchedNL.length; i++) {
+        if (searchedNL[i].info == getTF(donePending)) {
+          searchedNL2.push(searchedNL[i]);
+        }
+      }
+    }
+    if ($("#fliterDropDown2").val() == "Reinfo") {
+      for (let i = 0; i < searchedNL.length; i++) {
+        if (searchedNL[i].reinfo == getTF(donePending)) {
+          searchedNL2.push(searchedNL[i]);
+        }
+      }
+    }
+    if ($("#fliterDropDown2").val() == "Meetup") {
+      for (let i = 0; i < searchedNL.length; i++) {
+        if (searchedNL[i].meetup == getTF(donePending)) {
+          searchedNL2.push(searchedNL[i]);
+        }
+      }
+    }
+    if ($("#fliterDropDown2").val() == "Invi") {
+      for (let i = 0; i < searchedNL.length; i++) {
+        if (searchedNL[i].invi == getTF(donePending)) {
+          searchedNL2.push(searchedNL[i]);
+        }
+      }
+    }
+    if ($("#fliterDropDown2").val() == "Plan") {
+      for (let i = 0; i < searchedNL.length; i++) {
+        if (searchedNL[i].plan == getTF(donePending)) {
+          searchedNL2.push(searchedNL[i]);
+        }
+      }
+    }
+  } else {
+    searchedNL2 = searchedNL;
+  }
+
+  // console.log(searchedNL2);
+
+  generateNL(searchedNL2);
+}
+
 function generateRowNamelistUI(sl, prospect) {
   //
   $("#namelistTable").append(`
         						<tr>
 							<td class="sl">${sl}</td>
-							<th class="name_col z-[2] name"><input type="text" value="${
-                prospect.name
-              }" onchange="updateName(${prospect.id}, this)"/></th>
-							<td class="weekAdded"><input type="text" placeholder="week" onchange="updateWeekAdded(${
-                prospect.id
-              }, this)" value="${prospect.week}" /></td>
+							<th class="name_col z-[2] name"><input type="text" value="${prospect.name
+    }" onchange="updateName(${prospect.id}, this)"/></th>
+							<td class="weekAdded"><input type="text" placeholder="week" onchange="updateWeekAdded(${prospect.id
+    }, this)" value="${prospect.week}" /></td>
 							<td class="zone">
 								<select onchange="updateZone(${prospect.id}, this)">
 									<option ${prospect.zone == "Office" ? "selected" : ""}>Office</option>
@@ -368,84 +586,65 @@ function generateRowNamelistUI(sl, prospect) {
 									<option ${prospect.zone == "Others" ? "selected" : ""}>Others</option>
 								</select>
 							</td>
-							<td class="city"><input type="text" placeholder="city" onchange="updateCity(${
-                prospect.id
-              }, this)" value="${prospect.city}" /></td>
-							<td class="chatting bl"> <input type="checkbox" class="checkbox" onchange="updateChatting(${
-                prospect.id
-              }, this)" ${prospect.chatting == true ? "checked" : ""}/></td>
-							<td class="br socialMedia"> <input type="checkbox" class="checkbox" onchange="updateSocialMedia(${
-                prospect.id
-              }, this)" ${prospect.socialMedia == true ? "checked" : ""}/></td>
-              <td class="bl stage1"> <input type="checkbox" class="checkbox" onchange="updateStage1(${
-                prospect.id
-              }, this)" ${prospect.stage1 == true ? "checked" : ""}/></td>
-              <td class="br weekStage1 stage1"><input type="text" placeholder="week" onchange="updateStage1Week(${
-                prospect.id
-              }, this)" value="${prospect.stage1Week}"/></td>
-              <td class="bl stage2"> <input type="checkbox" class="checkbox" onchange="updateStage2(${
-                prospect.id
-              }, this)" ${prospect.stage2 == true ? "checked" : ""}/></td>
-              <td class="br weekStage2 stage2"><input type="text" placeholder="week" onchange="updateStage2Week(${
-                prospect.id
-              }, this)" value="${prospect.stage2Week}"/></td>
+							<td class="city"><input type="text" placeholder="city" onchange="updateCity(${prospect.id
+    }, this)" value="${prospect.city}" /></td>
+							<td class="chatting bl"> <input type="checkbox" class="checkbox" onchange="updateChatting(${prospect.id
+    }, this)" ${prospect.chatting == true ? "checked" : ""}/></td>
+							<td class="br socialMedia"> <input type="checkbox" class="checkbox" onchange="updateSocialMedia(${prospect.id
+    }, this)" ${prospect.socialMedia == true ? "checked" : ""}/></td>
+              <td class="bl stage1"> <input type="checkbox" class="checkbox" onchange="updateStage1(${prospect.id
+    }, this)" ${prospect.stage1 == true ? "checked" : ""}/></td>
+              <td class="br weekStage1 stage1"><input type="text" placeholder="week" onchange="updateStage1Week(${prospect.id
+    }, this)" value="${prospect.stage1Week}"/></td>
+              <td class="bl stage2"> <input type="checkbox" class="checkbox" onchange="updateStage2(${prospect.id
+    }, this)" ${prospect.stage2 == true ? "checked" : ""}/></td>
+              <td class="br weekStage2 stage2"><input type="text" placeholder="week" onchange="updateStage2Week(${prospect.id
+    }, this)" value="${prospect.stage2Week}"/></td>
 
-							<td class="bl info"> <input type="checkbox" class="checkbox" onchange="updateInfo(${
-                prospect.id
-              }, this)" ${prospect.info == true ? "checked" : ""}/></td>
-							<td class="weekInfo info"><input type="text" placeholder="week" onchange="updateInfoWeek(${
-                prospect.id
-              }, this)" value="${prospect.infoWeek}"/></td>
+							<td class="bl info"> <input type="checkbox" class="checkbox" onchange="updateInfo(${prospect.id
+    }, this)" ${prospect.info == true ? "checked" : ""}/></td>
+							<td class="weekInfo info"><input type="text" placeholder="week" onchange="updateInfoWeek(${prospect.id
+    }, this)" value="${prospect.infoWeek}"/></td>
 							<td class="br info">
-								<select class="response responseInfo" onchange="updateInfoResponse(${
-                  prospect.id
-                }, this)">
+								<select class="response responseInfo" onchange="updateInfoResponse(${prospect.id
+    }, this)">
 									<option></option>
 									<option ${prospect.infoResponse == "A" ? "selected" : ""}>A</option>
 									<option ${prospect.infoResponse == "B" ? "selected" : ""}>B</option>
 									<option ${prospect.infoResponse == "C" ? "selected" : ""}>C</option>
 								</select>
 							</td>
-							<td class="bl reinfo"> <input type="checkbox" class="checkbox" onchange="updateReInfo(${
-                prospect.id
-              }, this)" ${prospect.reinfo == true ? "checked" : ""}/></td>
-							<td class="weekReinfo reinfo"><input type="text" placeholder="week" onchange="updateReInfoWeek(${
-                prospect.id
-              }, this)" value="${prospect.reinfoWeek}"/></td>
+							<td class="bl reinfo"> <input type="checkbox" class="checkbox" onchange="updateReInfo(${prospect.id
+    }, this)" ${prospect.reinfo == true ? "checked" : ""}/></td>
+							<td class="weekReinfo reinfo"><input type="text" placeholder="week" onchange="updateReInfoWeek(${prospect.id
+    }, this)" value="${prospect.reinfoWeek}"/></td>
 							<td class="br reinfo">
-								<select class="response responseReinfo" onchange="updateReInfoResponse(${
-                  prospect.id
-                }, this)">
+								<select class="response responseReinfo" onchange="updateReInfoResponse(${prospect.id
+    }, this)">
 									<option></option>
 									<option ${prospect.reinfoResponse == "A" ? "selected" : ""}>A</option>
 									<option ${prospect.reinfoResponse == "B" ? "selected" : ""}>B</option>
 									<option ${prospect.reinfoResponse == "C" ? "selected" : ""}>C</option>
 								</select>
 							</td>
-							<td class="meetup"> <input type="checkbox" class="checkbox" onchange="updateMeetup(${
-                prospect.id
-              }, this)" ${prospect.meetup == true ? "checked" : ""}/></td>
-							<td class="bl invi"> <input type="checkbox" class="checkbox" onchange="updateInvi(${
-                prospect.id
-              }, this)" ${prospect.invi == true ? "checked" : ""}/></td>
-							<td class="weekInvite invi"><input type="text" placeholder="week" onchange="updateInviWeek(${
-                prospect.id
-              }, this)" value="${prospect.inviWeek}"/></td>
+							<td class="meetup"> <input type="checkbox" class="checkbox" onchange="updateMeetup(${prospect.id
+    }, this)" ${prospect.meetup == true ? "checked" : ""}/></td>
+							<td class="bl invi"> <input type="checkbox" class="checkbox" onchange="updateInvi(${prospect.id
+    }, this)" ${prospect.invi == true ? "checked" : ""}/></td>
+							<td class="weekInvite invi"><input type="text" placeholder="week" onchange="updateInviWeek(${prospect.id
+    }, this)" value="${prospect.inviWeek}"/></td>
 							<td class="br invi">
-								<select class="responseInvite" onchange="updateInviResponse(${
-                  prospect.id
-                }, this)">
+								<select class="responseInvite" onchange="updateInviResponse(${prospect.id
+    }, this)">
 									<option></option>
 									<option ${prospect.inviResponse == "Yes" ? "selected" : ""}>Yes</option>
 									<option ${prospect.inviResponse == "No" ? "selected" : ""}>No</option>
 								</select>
 							</td>
-							<td class="bl plan"> <input type="checkbox" class="checkbox" onchange="updatePlan(${
-                prospect.id
-              }, this)" ${prospect.plan == true ? "checked" : ""}/></td>
-							<td class="weekPlan plan"><input type="text" placeholder="week" onchange="updatePlanWeek(${
-                prospect.id
-              }, this)" value="${prospect.planWeek}"/></td>
+							<td class="bl plan"> <input type="checkbox" class="checkbox" onchange="updatePlan(${prospect.id
+    }, this)" ${prospect.plan == true ? "checked" : ""}/></td>
+							<td class="weekPlan plan"><input type="text" placeholder="week" onchange="updatePlanWeek(${prospect.id
+    }, this)" value="${prospect.planWeek}"/></td>
 							<td class="br plan">
 								<select class="planStatus" onchange="updatePlanStatus(${prospect.id}, this)">
 									<option></option>
@@ -455,28 +654,23 @@ function generateRowNamelistUI(sl, prospect) {
 									<option ${prospect.planStatus == "LA" ? "selected" : ""}>LA</option>
 									<option ${prospect.planStatus == "MIA" ? "selected" : ""}>MIA</option>
 									<option ${prospect.planStatus == "OOZ" ? "selected" : ""}>OOZ</option>
-									<option ${
-                    prospect.planStatus == "Onboarded" ? "selected" : ""
-                  }>Onboarded</option>
+									<option ${prospect.planStatus == "Onboarded" ? "selected" : ""
+    }>Onboarded</option>
 								</select>
 							</td>
-							<td class="remarks"><input type="text" placeholder="remarks" onchange="updateRemarks(${
-                prospect.id
-              }, this)" value="${prospect.remarks}"/></td>
+							<td class="remarks"><input type="text" placeholder="remarks" onchange="updateRemarks(${prospect.id
+    }, this)" value="${prospect.remarks}"/></td>
 							<th>
 								<div class="flex">
-									<div class=""><button class="btn btn-soft btn-sm btn-info p-0 h-7 w-7" onclick="transferProspectToKIV(${
-                    prospect.id
-                  })"><i
+									<div class=""><button class="btn btn-soft btn-sm btn-info p-0 h-7 w-7" onclick="transferProspectToKIV(${prospect.id
+    })"><i
 												class="w-5 h-5" data-lucide="eye"></i></button>
 									</div>
-									<div class="ml-1"><button class="btn btn-soft btn-sm btn-secondary p-0 h-7 w-7" onclick="transferProspectToLL(${
-                    prospect.id
-                  })"><i
+									<div class="ml-1"><button class="btn btn-soft btn-sm btn-secondary p-0 h-7 w-7" onclick="transferProspectToLL(${prospect.id
+    })"><i
 												class="w-5 h-5" data-lucide="snail"></i></button></div>
-									<div class="ml-1"><button class="btn btn-soft btn-sm btn-error p-0 h-7 w-7" onclick="openDeleteModal(${
-                    prospect.id
-                  })"><i
+									<div class="ml-1"><button class="btn btn-soft btn-sm btn-error p-0 h-7 w-7" onclick="openDeleteModal(${prospect.id
+    })"><i
 												class="w-5 h-5" data-lucide="trash-2"></i></button></div>
 								</div>
 
@@ -512,9 +706,9 @@ function goBack() {
   if (parseInt(pageNumber.innerHTML) > 1) {
     pageNumber.innerHTML = parseInt(pageNumber.innerHTML) - 1;
   }
-  if(isFilter){
+  if (isFilter) {
     generateNL(searchedNL);
-  }else{
+  } else {
     generateNL(namelist);
   }
 }
@@ -523,12 +717,12 @@ function goForward() {
   if (parseInt(pageNumber.innerHTML) < namelist.length / 10) {
     pageNumber.innerHTML = parseInt(pageNumber.innerHTML) + 1;
   }
-  if(isFilter){
+  if (isFilter) {
     generateNL(searchedNL);
-  }else{
+  } else {
     generateNL(namelist);
   }
- 
+
 }
 
 //Addition
@@ -814,13 +1008,13 @@ function transferProspectToLL(id) {
 
 //Modals
 
-function openDeleteModal(id){
+function openDeleteModal(id) {
   deleteModalProsName.innerHTML = getName(id);
   deleteModalProsID.innerHTML = id;
   deleteProspectModal.showModal();
 }
 
-$("#deleteProspectBtn").click(function(){
+$("#deleteProspectBtn").click(function () {
   removeProspect(deleteModalProsID.innerHTML);
 });
 
@@ -945,8 +1139,11 @@ function generateNL(namelist) {
     );
   }
 
-  if(isFilter){
+  if (isFilter) {
     enableSelectionUI($("#fliterDropDown").val());
+  }
+  if (isFilter2) {
+    enableSelectionUI2($("#fliterDropDown2").val());
   }
 }
 

@@ -50,7 +50,8 @@
 									</div>
 									<div class="option flex-none ml-1 hidden">
 										<label id="sortName" class="input input-sm">
-											<input type="text" placeholder="search a name.." onkeyup="searchByName(this)"/>
+											<input type="text" placeholder="search a name.."
+												onkeyup="searchByName(this)" />
 										</label>
 									</div>
 									<div class="option flex-none ml-1 hidden">
@@ -75,7 +76,8 @@
 									</div>
 									<div class="option flex-none ml-1 hidden">
 										<label id="sortCity" class="input input-sm">
-											<input type="text" placeholder="search a city.." onkeyup="searchByCity(this)"/>
+											<input type="text" placeholder="search a city.."
+												onkeyup="searchByCity(this)" />
 										</label>
 									</div>
 									<div class="option flex-none ml-1 hidden">
@@ -90,6 +92,40 @@
 									<!--Close button goes here-->
 									<div class="flex-none ml-1">
 										<button id="cancelFilterBtn" class="btn btn-sm btn-error p-0 w-8 h-8 hidden">
+											<i class="h-5 w-5 " data-lucide="x"></i>
+										</button>
+										<button id="addFilterBtn" class="btn btn-sm btn-info p-0 w-8 h-8 hidden">
+											<i class="h-5 w-5 " data-lucide="list-filter-plus"></i>
+										</button>
+									</div>
+									<div class="option2 flex-none ml-1 hidden">
+										<label class="select select-sm w-44">
+
+											<span class="label"><i class="h-5 w-5" data-lucide="list-filter"></i></span>
+											<select id="fliterDropDown2" onchange="filterValueChanged2(this)">
+												<option></option>
+												<option>Social Media</option>
+												<option>Stage 1</option>
+												<option>Stage 2</option>
+												<option>Info</option>
+												<option>Reinfo</option>
+												<option>Meetup</option>
+												<option>Invi</option>
+												<option>Plan</option>
+											</select>
+										</label>
+									</div>
+									<div class="option2 flex-none ml-1 hidden">
+										<label id="sortDonePending2" class="select select-sm">
+											<select onchange="searchByDonePending2(this)">
+												<option></option>
+												<option>Done</option>
+												<option>Pending</option>
+											</select>
+										</label>
+									</div>
+									<div class="option2 flex-none ml-1 hidden">
+										<button id="cancelFilterBtn2" class="btn btn-sm btn-error p-0 w-8 h-8">
 											<i class="h-5 w-5 " data-lucide="x"></i>
 										</button>
 									</div>
@@ -199,7 +235,8 @@
 												id="nlCount">37</span></b> namelist</p>
 								</div>
 								<div class="flex-1 ml-10">
-									<div role="alert" class="alert alert-success alert-soft w-90 justify-self-end hidden">
+									<div role="alert"
+										class="alert alert-success alert-soft w-90 justify-self-end hidden">
 										<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current"
 											fill="none" viewBox="0 0 24 24">
 											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -208,7 +245,7 @@
 										<span id="alertContent"></span>
 									</div>
 								</div>
-								
+
 							</div>
 
 
@@ -269,18 +306,20 @@
 			</dialog>
 			<dialog id="deleteProspectModal" class="modal">
 				<div class="modal-box">
-				  <h3 class="text-lg font-bold">Delete prospect ?</h3>
-				  <p class="py-4">Are you sure you want to remove <b><span id="deleteModalProsName"></span></b> ? <span id="deleteModalProsID" class="hidden"></span></p>
-				  <div class="modal-action">
-					<form method="dialog">
-						<!-- if there is a button in form, it will close the modal -->
-						<button class="btn btn-soft">Cancel</button>
-						<button id="deleteProspectBtn" class="btn btn-error ml-1">Delete</button>
-					</form>
-				</div>
+					<h3 class="text-lg font-bold">Delete prospect ?</h3>
+					<p class="py-4">Are you sure you want to remove <b><span id="deleteModalProsName"></span></b> ?
+						<span id="deleteModalProsID" class="hidden"></span>
+					</p>
+					<div class="modal-action">
+						<form method="dialog">
+							<!-- if there is a button in form, it will close the modal -->
+							<button class="btn btn-soft">Cancel</button>
+							<button id="deleteProspectBtn" class="btn btn-error ml-1">Delete</button>
+						</form>
+					</div>
 				</div>
 				<form method="dialog" class="modal-backdrop">
-				  <button>close</button>
+					<button>close</button>
 				</form>
 			</dialog>
 
